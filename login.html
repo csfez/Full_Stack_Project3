@@ -3,26 +3,16 @@
 
   <head>
     <title>Playcountry Login Page</title>
-    <link rel="stylesheet" href="loginStyle.css">
-    <script src="loginScript.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./loginStyle.css">
   </head>
 
   <body>
     <main>
-      
       <div class="login-form">
           <img src="https://assets-global.website-files.com/62196607bf1b46c300301846/62196607bf1b46ebfb301f19_5f5bc69416e7fb495275b378_how%2520leaders%2520run%2520meetings%2520tips%2520from%2520top%2520execs.jpeg" class="login_img"/>
-            <div class="page active" id="sign_in">
-              <div class="tab">
-                <button class="btn" data-target="sign_in">Sign in</button>
-                <button class="btn" data-target="sign_up">Register</button>
-              </div>
-
-             
-              
+            <div class="'page active" id="home">
               <form>
-                <h1>Sign in</h1>
+                <h1>Login</h1>
 
                 <div class="content">
                   <div class="input-field">
@@ -33,53 +23,51 @@
                   </div>
                 </div>
 
-            
                 <div class="action">
-                  <button id="sign_in_btn" data-target="app">Sign in</button>
+                  <button>Register</button>
+                  <button>Sign in</button>
                 </div>
 
-              </form>
+            </form>
             </div> 
-
-            <div class="page" id="sign_up">
-              <div class="tab">
-                <button class="btn" data-target="sign_in">Sign in</button>
-                <button class="btn" data-target="sign_up">Register</button>
-              </div>
-
-           
-              <form >
-                <h1>Register</h1>
-
-                <div class="content">
-                  <div class="input-field">
-                    <input id="uname" type="userName" placeholder="User Name" required>
+            <div class="page">
+              <form name='form-login'>
+            
+                  <div  class="input-field">
+                    <input type="text" id="name" class="input" placeholder="User name" required>
                   </div>
-                  <div class="input-field">
-                    <input id="psw" type="password" placeholder="Password" required>
+                  <div  class="input-field">
+                    <input type="email" class="input" id= "email" placeholder="Email" required>
                   </div>
-                  <label>Must contain a lowercase letter.</label><br>
-                  <label>Must contain an uppercase letter.</label><br>
-                  <label>Must contain a number or special character.</label><br>
-                </div>
-      
-
-                  
-
-                  <div class="action">
+        
+                  <div  class="input-field">
+                    <input type="password" class="input" id= "pw" placeholder="Password" required>
+                  </div>
+        
+                  <div  class="input-field">
+                    <input type="password" class="input" id= "repeat_pw" placeholder="Confirm Password" required >
+                  </div>
+        
+                  <ul class="helper-text">
+                    <li class="lowercase">Must contain a lowercase letter.</li>
+                    <li class="uppercase">Must contain an uppercase letter.</li>
+                    <li class="special">Must contain a number or special character.</li>
+                  </ul>
+                  <div class="group">
                     <input id="rgstr_btn" class="button" type="submit" value="Sign Up" onclick="store()">
+                    </div>
+                  
+                  <div class="hr"></div>
+                  <div class="foot-lnk">
+                    <label for="tab-1">Already Member?</a>
                   </div>
-          
-                  <div class="action">
-                    <button id="register_btn"  >Register</button>
-                  </div>
-
-                </div>
+              
               </form> 
           </div>
+      </div>
 
 
     <!-- <script  src="./loginScript.js" defer></script> -->
-    </main>
+  </main>
   </body>
 </html>
