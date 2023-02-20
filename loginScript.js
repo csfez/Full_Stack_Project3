@@ -1,14 +1,57 @@
 //localStorage.clear();
-let username;
-let psw;
-let userArray;
 
-let registerButton = document.getElementsByTagName('button')[0];
-let signInButton = document.getElementsByTagName('button')[1];
-registerButton.addEventListener('click', register);
-signInButton.addEventListener('click', signIn);
+const app={
+  pages:[],
+  show:new Event('show'),
+  init:function(){
 
-initialize();
+    app.pages=document.querySelectorAll('.page');
+    app.pages.forEach((pg)=>{
+      pg.addEventListener('show', app.pageShown);
+    })
+
+    document.querySelectorAll('.btn').forEach((button)=>{
+      button.addEventListener('click', app.nav);
+    })
+
+    let username;
+    let psw;
+    let userArray;
+
+    let registerButton = document.getElementById('sign_in_btn');
+    let signInButton = document.getElementById('register_btn');
+    registerButton.addEventListener('click', register);
+    signInButton.addEventListener('click', signIn);
+    initialize();
+    history.replaceState({}, 'Home', '#sign_in');
+  },
+
+  nav:function(ev){
+    ev.preventDefault();
+    let currentPage = ev.target.getAttribute('data-target');
+    document.querySelector('.active').classList.remove('active');
+    document.getElementById(currentPage).classList.add('active');
+    console.log(currentPage)
+    history.pushState({}, currentPage, `#${currentPage}`);
+    document.getElementById(currentPage).dispatchEvent(app.show);
+  },
+
+  pageShown: function(ev){},
+
+ 
+}
+
+document.addEventListener('DOMContentLoaded', app.init);
+// let username;
+// let psw;
+// let userArray;
+
+// let registerButton = document.getElementsByTagName('button')[0];
+// let signInButton = document.getElementsByTagName('button')[1];
+// registerButton.addEventListener('click', register);
+// signInButton.addEventListener('click', signIn);
+
+// initialize();
 
 function initialize(){
   userArray=localStorage.getItem('all_users');
@@ -48,7 +91,7 @@ function addData(){
   let tesRegex=  /^[A-Za-z]\w*$/;
   if(!username.match(tesRegex)) 
   { 
-    alert("username must atart with a letter and contain only characters, digits and underscore");
+    alert("username must tart with a letter and contain only characters, digits and underscore");
     return false;
   }
 
