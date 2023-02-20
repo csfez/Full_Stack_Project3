@@ -4,9 +4,10 @@ var net=new network();
 
 
 function open(method, url, async) {
+
 }
 
-function send(){
+function send(){  //send the request to network
 
 }
 
