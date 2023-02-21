@@ -63,6 +63,7 @@ ul {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  min-width: 900px;
   max-width: 1200px;
   height: 90vh;
   max-height: 900px;
@@ -88,6 +89,8 @@ ul {
   color: var(--main-color);
   margin-bottom: 14px;
   font-weight: 500;
+  border-bottom: 1px solid #ddd;
+
 }
 .item img {
   width: 14px;
@@ -137,13 +140,7 @@ ul {
   margin-top: 30px;
 }
 
-.content-categories {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  border-bottom: 1px solid #ddd;
-  padding: 20px 0;
-}
+
 
 .nav-item {
   display: none;
@@ -192,9 +189,7 @@ ul {
 .task:hover {
   transform: translatex(2px);
 }
-.task label {
-  cursor: pointer;
-}
+
 label .label-text {
   position: relative;
 }
@@ -209,15 +204,6 @@ label .label-text:before {
   transition: 0.2s ease;
 }
 
-.task-item:checked + label .label-text:before {
-  background-color: var(--checkbox-color);
-  border: none;
-  background-image: url('svg/check.svg');
-  background-repeat: no-repeat;
-  background-size: 10px;
-  background-position: center;
-  border: 1px solid var(--checkbox-color);
-}
 .tag {
   font-size: 10px;
   padding: 4px 8px;
@@ -240,37 +226,10 @@ label .label-text:before {
   color: var(--tag-color-text-four);
 }
 
-.upcoming {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
-}
 /*  */
 
-.members {
-  display: flex;
-  margin-top: 14px;
-}
-.members img {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  margin-right: 4px;
-  object-fit: cover;
-}
 
-.right-bar {
-  width: 320px;
-  border-left: 1px solid #e3e7f7;
-  display: flex;
-  flex-direction: column;
-}
 
-.right-bar .header {
-  font-size: 20px;
-  color: var(--main-text-color);
-  margin-left: 30px;
-}
 .top-part {
   padding: 30px;
   align-self: flex-end;
@@ -291,11 +250,7 @@ label .label-text:before {
   color: #fff;
   justify-content: center;
 }
-.right-content {
-  padding: 10px 40px;
-  overflow-y: auto;
-  flex: 1;
-}
+
 .task-box {
   position: relative;
   border-radius: 12px;
@@ -308,11 +263,7 @@ label .label-text:before {
 .task-box:hover {
   transform: scale(1.02);
 }
-.time {
-  margin-bottom: 6px;
-  opacity: 0.4;
-  font-size: 10px;
-}
+
 
 body,
 .item,
@@ -352,7 +303,6 @@ body,
     flex-direction: column;
     overflow-y: auto;
   }
-  .right-bar,
   .page-content {
     width: 100%;
     display: block;

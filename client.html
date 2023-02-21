@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Management Dashboard UI</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <script src="loginScript.js"></script>
   </head>
   <body>
@@ -24,17 +26,13 @@
             <!-- left content starts -->
             <div class="left-content">
               <ul class="action-list">
-                <li class="item">
-                  <img class="feather feather-inbox" src="svg/inbox.svg" alt="" />
-                  <span>Inbox</span>
-                </li>
-                <li class="item">
-                  <img class="feather feather-star" src="svg/star.svg" alt="" />
-                  <span> Today</span>
-                </li>
+                
                 <li class="item">
                   <img class="feather feather-calendar" src="svg/calender.svg" alt="" />
-                  <span>Upcoming</span>
+                  <span>
+                    <i class="fa-solid fa-clipboard-list-check"></i>
+                    All meetings
+                </span>
                 </li>
                 <li class="item">
                   <img class="feather feather-hash" src="svg/hash.svg" alt="" />
@@ -42,30 +40,11 @@
                 </li>
                 <li class="item">
                   <img class="feather feather-users" src="svg/users.svg" alt="" />
-                  <span>Meetings</span>
+                  <span> Add new meeting</span>
                 </li>
                 <li class="item">
                   <img class="feather feather-trash" src="svg/trash.svg" alt="" />
                   <span>Trash</span>
-                </li>
-              </ul>
-
-              <ul class="category-list">
-                <li class="item">
-                  <img class="feather feather-users" src="svg/users.svg" alt="" />
-                  <span>Family</span>
-                </li>
-                <li class="item">
-                  <img class="feather feather-sun" src="svg/sun.svg" alt="" />
-                  <span>Vacation</span>
-                </li>
-                <li class="item">
-                  <img class="feather feather-trending-up" src="svg/trending.svg" alt="" />
-                  <span>Festival</span>
-                </li>
-                <li class="item">
-                  <img class="feather feather-zap" src="svg/zap.svg" alt="" />
-                  <span>Concerts</span>
                 </li>
               </ul>
             </div>
@@ -76,28 +55,9 @@
 
           <!-- page content starts -->
           <div class="page-content">
-            <div class="header">Today Meetings</div>
-            <!-- contnet categories starts -->
-            <div class="content-categories">
-              <div class="label-wrapper">
-                <input class="nav-item" name="nav" type="radio" id="opt-1" />
-                <label class="category" for="opt-1">All</label>
-              </div>
-              <div class="label-wrapper">
-                <input class="nav-item" name="nav" type="radio" id="opt-2" checked />
-                <label class="category" for="opt-2">Important</label>
-              </div>
-              <div class="label-wrapper">
-                <input class="nav-item" name="nav" type="radio" id="opt-3" />
-                <label class="category" for="opt-3">Notes</label>
-              </div>
-              <div class="label-wrapper">
-                <input class="nav-item" name="nav" type="radio" id="opt-4" />
-                <label class="category" for="opt-4">Links</label>
-              </div>
-            </div>
-            <!--  -->
-            <!-- contemt categories ends -->
+             
+                <label class="category header" for="opt-2">Today Meetings</label>
+            
             <!-- tasks wrapper starts -->
             <div class="meetings-wrapper" id="meetings">
                 
@@ -177,17 +137,6 @@
           </div>
           <!--  -->
           <!-- page content ends -->
-
-          <!-- right bar starts -->
-          <div class="right-bar">
-            <div class="top-part">
-              <img class="feather feather-users" src="svg/users.svg" alt="" />
-              <div class="count">6</div>
-            </div>
-            <div class="header">Schedule</div>
-            <div class="right-content">
-            </div>
-          </div>
         </div>
       </div>
     </main>
