@@ -40,14 +40,14 @@ const app={
     // (`#${history.state}`).hide();
     
     // const element = listItem.getElementById("div_temp");
-
-    var tempOld=document.querySelector();
+    console.log(history.state);
+    var tempOld=document.querySelector(`#${history.state}`);
     // var clonOld = tempOld.content.cloneNode(true);
-
-    var listItemTempOld = document.importNode(tempOld.content, true);
+    console.log(history.state);
+    // var listItemTempOld = document.importNode(tempOld.content, true);
 
     // listItemTempOld.getElementById("div_temp").innerHTML="";
-    document.querySelector('#sign_on').removeChild(listItemTempOld);
+    document.querySelector('#sign_on').removeChild(tempOld);
     document.querySelector('#sign_on').appendChild(clon);
   
     console.log(history.state)
