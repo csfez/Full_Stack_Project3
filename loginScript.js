@@ -1,42 +1,71 @@
 //localStorage.clear();
 
 const app={
-  pages:[],
-  show:new Event('show'),
+  // pages:[],
+  // show:new Event('show'),
   init:function(){
 
-    app.pages=document.querySelectorAll('.page');
-    app.pages.forEach((pg)=>{
-      pg.addEventListener('show', app.pageShown);
-    })
+    app.pages=document.getElementsByTagName("template");
+    console.log(app.pages);
 
     document.querySelectorAll('.btn').forEach((button)=>{
       button.addEventListener('click', app.nav);
     })
 
+    var temp = document.querySelector('#sign_in');
+    var clon = temp.content.cloneNode(true);
+    document.querySelector('#sign_on').appendChild(clon);
+
     let username;
     let psw;
     let userArray;
 
-    let registerButton = document.getElementById('sign_in_btn');
-    let signInButton = document.getElementById('register_btn');
-    registerButton.addEventListener('click', register);
-    signInButton.addEventListener('click', signIn);
-    initialize();
-    history.replaceState({}, 'Home', '#sign_in');
+    // let registerButton = document.getElementById('sign_in_btn');
+    // let signInButton = document.getElementById('register_btn');
+    // registerButton.addEventListener('click', register);
+    // signInButton.addEventListener('click', signIn);
+    // initialize();
+    history.replaceState("sign_in_div", 'Home', '#sign_in');
   },
 
   nav:function(ev){
+
     ev.preventDefault();
     let currentPage = ev.target.getAttribute('data-target');
-    document.querySelector('.active').classList.remove('active');
-    document.getElementById(currentPage).classList.add('active');
-    console.log(currentPage)
-    history.pushState({}, currentPage, `#${currentPage}`);
-    document.getElementById(currentPage).dispatchEvent(app.show);
+    var temp = document.querySelector(`#${currentPage}`);
+    var clon = temp.content.cloneNode(true);
+
+    var listItem = document.importNode(temp.content, true);
+
+    // (`#${history.state}`).hide();
+    
+    // const element = listItem.getElementById("div_temp");
+    console.log(history.state);
+    var tempOld=document.querySelector(`#${history.state}`);
+    // var clonOld = tempOld.content.cloneNode(true);
+    console.log(history.state);
+    // var listItemTempOld = document.importNode(tempOld.content, true);
+
+    // listItemTempOld.getElementById("div_temp").innerHTML="";
+    document.querySelector('#sign_on').removeChild(tempOld);
+    document.querySelector('#sign_on').appendChild(clon);
+  
+    console.log(history.state)
+    if(currentPage=="sign_in"){
+      let SignInButton = listItem.getElementById('sign_in_btn');
+      SignInButton.addEventListener('click', signIn);
+      
+
+      initialize();
+    }
+    if(currentPage=="sign_up"){
+      let signUpButton = document.getElementById('register_btn');
+      signUpButton.addEventListener('click', register);
+    }
+    
+     history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
-  pageShown: function(ev){},
 
  
 }
@@ -145,6 +174,7 @@ function signIn(){
         cleanInputs();
         window.location.replace("./client.html");
         sessionStorage.setItem("cuurentUser",username);
+        addEventListener('click',app.nav);
         return;
       }
       alert("wrong password");
