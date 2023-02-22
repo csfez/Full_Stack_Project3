@@ -25,24 +25,36 @@ const app={
     // registerButton.addEventListener('click', register);
     // signInButton.addEventListener('click', signIn);
     // initialize();
-    history.replaceState({}, 'Home', '#sign_in');
+    history.replaceState("sign_in_div", 'Home', '#sign_in');
   },
 
   nav:function(ev){
+
     ev.preventDefault();
     let currentPage = ev.target.getAttribute('data-target');
     var temp = document.querySelector(`#${currentPage}`);
     var clon = temp.content.cloneNode(true);
 
-    //  var listItem = document.importNode(temp.content, true);
+    var listItem = document.importNode(temp.content, true);
+
+    // (`#${history.state}`).hide();
+    
     // const element = listItem.getElementById("div_temp");
 
-    document.getElementById("div_temp").innerHTML="";
-    document.querySelector('#sign_on').appendChild(clon);
+    var tempOld=document.querySelector();
+    // var clonOld = tempOld.content.cloneNode(true);
 
+    var listItemTempOld = document.importNode(tempOld.content, true);
+
+    // listItemTempOld.getElementById("div_temp").innerHTML="";
+    document.querySelector('#sign_on').removeChild(listItemTempOld);
+    document.querySelector('#sign_on').appendChild(clon);
+  
+    console.log(history.state)
     if(currentPage=="sign_in"){
       let SignInButton = listItem.getElementById('sign_in_btn');
       SignInButton.addEventListener('click', signIn);
+      
 
       initialize();
     }
@@ -50,8 +62,8 @@ const app={
       let signUpButton = document.getElementById('register_btn');
       signUpButton.addEventListener('click', register);
     }
-
-     history.pushState({}, currentPage, `#${currentPage}`);
+    
+     history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
 
