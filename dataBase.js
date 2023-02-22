@@ -1,26 +1,36 @@
-class user {
-    constructor(userId,name, password) {
-      this.userId=userId;
-      this.name = name;
-      this.password = password;
-      this.tasks=[];
-    }
-    newTask(task){
-        let u = new task(task.userId)
-        this.tasks.push(task)
-        return p
-      }
-}
-class task{
-    constructor(taskId,userId,title,content,CreationDate,date) {
-        this.title = title;
-        this.password = password;
-    }
-}
-  
-  let date = new Date();
-  let year = date.getFullYear();
-  
-  let myCar = new Car("Ford", 2014);
-  document.getElementById("demo").innerHTML=
-  "My car is " + myCar.age(year) + " years old.";
+var users=[
+  { "name":"chirly",
+    "password":"qw",
+    "tasks":["1","2"]
+  },
+  { "name":"yael",
+    "password":"qw",
+    "tasks":["3","4"]
+  }
+]
+
+var tasks=[
+  {
+    "taskId":"1",
+    "date":'22/02/2023',
+    "title":"holidays",
+    "content":""
+  },
+  {
+    "taskId":"2",
+    "date":'22/02/2023',
+    "title":"menus",
+    "content":""
+  },
+  {
+    "taskId":3,
+    "date":'22/02/2023',
+    "title":"books",
+    "content":""
+  }
+]
+
+window.localStorage.setItem(users, JSON.stringify(users));
+window.localStorage.setItem(tasks, JSON.stringify(tasks));
+
+
