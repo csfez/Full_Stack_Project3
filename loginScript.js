@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', app.init);
 // registerButton.addEventListener('click', register);
 // signInButton.addEventListener('click', signIn);
 
-// initialize();
+initialize();
 
 function initialize(){
   userArray=localStorage.getItem('all_users');
