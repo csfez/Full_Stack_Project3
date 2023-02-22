@@ -45,19 +45,19 @@ initialize();
 
 function initialize(){
   userArray=localStorage.getItem('users');
-  taskArray=localStorage.getItem('tasks');
-  taskId=localStorage.getItem('taskId');
+  meetingArray=localStorage.getItem('meetings');
+  meetingId=localStorage.getItem('meetingId');
 
   if(userArray===null){
     userArray = new Array();
-    taskArray=new Array();
+    meetingArray=new Array();
     localStorage.setItem('users',JSON.stringify(userArray));
-    localStorage.setItem('tasks',JSON.stringify(taskArray));
-    localStorage.setItem('taskId',0);
+    localStorage.setItem('meetings',JSON.stringify(meetingArray));
+    localStorage.setItem('meetingId',0);
   }
   else{
     userArray=JSON.parse(userArray);
-    taskArray=JSON.parse(taskArray);
+    meetingArray=JSON.parse(meetingArray);
 
   }
 }
@@ -159,7 +159,7 @@ function signIn(){
   alert("user name does not exist");
 }
 
-function addNewTask(){
+function addNewMeeting(){
   let currentUser=sessionStorage.getItem('currentUser');
   var storedUsers = JSON.parse(localStorage.getItem("users"));
   var storedTasks =  JSON.parse(localStorage.getItem("tasks"));

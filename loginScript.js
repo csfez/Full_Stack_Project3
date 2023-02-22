@@ -26,6 +26,7 @@ const app={
     // signInButton.addEventListener('click', signIn);
     // initialize();
     history.replaceState("sign_in_div", 'Home', '#sign_in');
+    
   },
 
   nav:function(ev){
@@ -55,14 +56,15 @@ const app={
       let SignInButton = listItem.getElementById('sign_in_btn');
       SignInButton.addEventListener('click', signIn);
       
-
-      initialize();
     }
     if(currentPage=="sign_up"){
       let signUpButton = document.getElementById('register_btn');
-      signUpButton.addEventListener('click', register);
+      signUpButton.addEventListener('click', addData);
     }
     
+    if(currentPage=="app"){
+
+    }
      history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
@@ -71,6 +73,12 @@ const app={
 }
 
 document.addEventListener('DOMContentLoaded', app.init);
+
+const element = document.getElementById("register_btn");
+element.addEventListener("click", function() {
+  addData();
+});
+
 // let username;
 // let psw;
 // let userArray;
@@ -80,47 +88,47 @@ document.addEventListener('DOMContentLoaded', app.init);
 // registerButton.addEventListener('click', register);
 // signInButton.addEventListener('click', signIn);
 
-initialize();
+// initialize();
 
-function initialize(){
-  userArray=localStorage.getItem('all_users');
-  if(userArray===null){
-    userArray = new Array();
-    localStorage.setItem('all_users',JSON.stringify(userArray));
-  }
-  else{
-    userArray=JSON.parse(userArray);
-  }
-}
+// function initialize(){
+//   userArray=localStorage.getItem('all_users');
+//   if(userArray===null){
+//     userArray = new Array();
+//     localStorage.setItem('all_users',JSON.stringify(userArray));
+//   }
+//   else{
+//     userArray=JSON.parse(userArray);
+//   }
+// }
 
-function register(){
-  username = document.getElementById('uname').value;
-  psw = document.getElementById('psw').value;
+// function register(){
+//   username = document.getElementById('uname').value;
+//   psw = document.getElementById('psw').value;
 
-  for (const user of userArray){
-    if(user.name===username){
-      alert("uesr name already exist!")
-      return;
-    }
-  }
-  if(addData()){
-    cleanInputs();
-    window.location.replace('./main.html');
-    sessionStorage.setItem("cuurentUser",username);
-  }
-}
+//   for (const user of userArray){
+//     if(user.name===username){
+//       alert("uesr name already exist!")
+//       return;
+//     }
+//   }
+//   if(addData()){
+//     cleanInputs();
+//     window.location.replace('./main.html');
+//     sessionStorage.setItem("cuurentUser",username);
+//   }
+// }
 
-function cleanInputs() {
-  document.getElementById('uname').value = "";
-  document.getElementById('psw').value = "";
-}
+// function cleanInputs() {
+//   document.getElementById('uname').value = "";
+//   document.getElementById('psw').value = "";
+// }
 
 function addData(){
   //test username
   let tesRegex=  /^[A-Za-z]\w*$/;
   if(!username.match(tesRegex)) 
   { 
-    alert("username must tart with a letter and contain only characters, digits and underscore");
+    alert("username must start with a letter and contain only characters, digits and underscore");
     return false;
   }
 
@@ -129,57 +137,66 @@ function addData(){
     return false;
   }
 
-  let user={name:username, password:psw, rockScore:0, arkanoidScore:0};
-  userArray.push(user);
-  localStorage.setItem('all_users',JSON.stringify(userArray));
-  return true;
+  let user={
+    name:username,
+     password:psw, 
+     meetings:[]
+    };
+
+// var user_json=JSON.stringify(user);
+  var Fxml=new FXMLHttpRequest();
+  Fxml.open("POST","FXMLHttpRequest.js",true);
+  Fxml.send(user);
+    // userArray.push(user);
+  // localStorage.setItem('all_users',JSON.stringify(userArray));
+  // return true;
 }
 
-function checkPassword(psw) {
-  const isWhitespace = /^(?=.*\s)/;
-  if (isWhitespace.test(psw)) {
-    alert("Password must not contain Whitespaces");
-    return false;
-  }
+// function checkPassword(psw) {
+//   const isWhitespace = /^(?=.*\s)/;
+//   if (isWhitespace.test(psw)) {
+//     alert("Password must not contain Whitespaces");
+//     return false;
+//   }
 
-  const isContainsLetter = /^(?=.*[A-Za-z])/;
-  if (!isContainsLetter.test(psw)) {
-    alert("Password must contain at least one Letter");
-    return false;
-  }
+//   const isContainsLetter = /^(?=.*[A-Za-z])/;
+//   if (!isContainsLetter.test(psw)) {
+//     alert("Password must contain at least one Letter");
+//     return false;
+//   }
 
-  const isContainsNumber = /^(?=.*[0-9])/;
-  if (!isContainsNumber.test(psw)) {
-    alert("Password must contain at least one Digit");
-    return false;
-  }
+//   const isContainsNumber = /^(?=.*[0-9])/;
+//   if (!isContainsNumber.test(psw)) {
+//     alert("Password must contain at least one Digit");
+//     return false;
+//   }
 
-  const isValidLength = /^.{3,15}$/;
-  if (!isValidLength.test(psw)) {
-    alert("Password must be 3-15 Characters Long");
-    return false;
-  }
+//   const isValidLength = /^.{3,15}$/;
+//   if (!isValidLength.test(psw)) {
+//     alert("Password must be 3-15 Characters Long");
+//     return false;
+//   }
 
-  return true;
-}
+//   return true;
+// }
 
 
-function signIn(){
-  username = document.getElementById('uname').value;
-  psw = document.getElementById('psw').value;
+// function signIn(){
+//   username = document.getElementById('uname').value;
+//   psw = document.getElementById('psw').value;
 
-  for (const user of userArray){
-    if(user.name===username){
-      if(user.password===psw){
-        cleanInputs();
-        window.location.replace("./client.html");
-        sessionStorage.setItem("cuurentUser",username);
-        addEventListener('click',app.nav);
-        return;
-      }
-      alert("wrong password");
-      return;
-    }
-  }
-  alert("user name does not exist");
-}
+//   for (const user of userArray){
+//     if(user.name===username){
+//       if(user.password===psw){
+//         cleanInputs();
+//         window.location.replace("./client.html");
+//         sessionStorage.setItem("cuurentUser",username);
+//         addEventListener('click',app.nav);
+//         return;
+//       }
+//       alert("wrong password");
+//       return;
+//     }
+//   }
+//   alert("user name does not exist");
+// }
