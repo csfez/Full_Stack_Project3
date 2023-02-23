@@ -1,5 +1,6 @@
 //localStorage.clear();
-
+// import {FXMLHttpRequest} from "Full_Stack_Project3\FXMLHttpRequest.js"
+// import FXMLHttpRequest from 'Full_Stack_Project3\FXMLHttpRequest.js'
 const app={
   // pages:[],
   // show:new Event('show'),
@@ -144,7 +145,7 @@ function addUser(){
 
   var user_json=JSON.stringify(user);
   var Fxml=new FXMLHttpRequest();
-  Fxml.open("POST","dataBase.js",true);
+  Fxml.open("POST","dataBase.js",user_json,true);
   Fxml.send(user_json);
     // userArray.push(user);
   // localStorage.setItem('all_users',JSON.stringify(userArray));

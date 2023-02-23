@@ -1,7 +1,8 @@
-import {network} from "./network.js"
+//import {network} from "./network.js"
 
 
 class FXMLHttpRequest{
+   
 
   open(method, url, body, async) {
     this.method=method;
@@ -14,11 +15,13 @@ class FXMLHttpRequest{
   }
 
   send(){  //send the request to network
-    this.responseText=network.send(this);
+    var net=new network()
+    this.responseText=net.send(this);
   }
 
   send(data){
-    this.responseText=network.send(data,this);
+    var net=new network()
+    this.responseText=net.send(this);
   }
 }
 
