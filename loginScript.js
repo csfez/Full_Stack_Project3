@@ -59,7 +59,7 @@ const app={
     }
     if(currentPage=="sign_up"){
       let signUpButton = document.getElementById('register_btn');
-      signUpButton.addEventListener('click', addData);
+      signUpButton.addEventListener('click', addUser);
     }
     
     if(currentPage=="app"){
@@ -72,12 +72,8 @@ const app={
  
 }
 
-document.addEventListener('DOMContentLoaded', app.init);
 
-const element = document.getElementById("register_btn");
-element.addEventListener("click", function() {
-  addData();
-});
+document.addEventListener('DOMContentLoaded', app.init);
 
 // let username;
 // let psw;
@@ -123,8 +119,10 @@ element.addEventListener("click", function() {
 //   document.getElementById('psw').value = "";
 // }
 
-function addData(){
+function addUser(){
   //test username
+  username = document.getElementById('uname').value;
+  psw = document.getElementById('psw').value;
   let tesRegex=  /^[A-Za-z]\w*$/;
   if(!username.match(tesRegex)) 
   { 
@@ -152,33 +150,35 @@ function addData(){
   // return true;
 }
 
-// function checkPassword(psw) {
-//   const isWhitespace = /^(?=.*\s)/;
-//   if (isWhitespace.test(psw)) {
-//     alert("Password must not contain Whitespaces");
-//     return false;
-//   }
 
-//   const isContainsLetter = /^(?=.*[A-Za-z])/;
-//   if (!isContainsLetter.test(psw)) {
-//     alert("Password must contain at least one Letter");
-//     return false;
-//   }
 
-//   const isContainsNumber = /^(?=.*[0-9])/;
-//   if (!isContainsNumber.test(psw)) {
-//     alert("Password must contain at least one Digit");
-//     return false;
-//   }
+function checkPassword(psw) {
+  const isWhitespace = /^(?=.*\s)/;
+  if (isWhitespace.test(psw)) {
+    alert("Password must not contain Whitespaces");
+    return false;
+  }
 
-//   const isValidLength = /^.{3,15}$/;
-//   if (!isValidLength.test(psw)) {
-//     alert("Password must be 3-15 Characters Long");
-//     return false;
-//   }
+  const isContainsLetter = /^(?=.*[A-Za-z])/;
+  if (!isContainsLetter.test(psw)) {
+    alert("Password must contain at least one Letter");
+    return false;
+  }
 
-//   return true;
-// }
+  const isContainsNumber = /^(?=.*[0-9])/;
+  if (!isContainsNumber.test(psw)) {
+    alert("Password must contain at least one Digit");
+    return false;
+  }
+
+  const isValidLength = /^.{3,15}$/;
+  if (!isValidLength.test(psw)) {
+    alert("Password must be 3-15 Characters Long");
+    return false;
+  }
+
+  return true;
+}
 
 
 // function signIn(){
