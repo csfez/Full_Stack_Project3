@@ -9,14 +9,15 @@ class FXMLHttpRequest{
     this.body=body;
     this.async=async;
     this.status=0;
+    this.responseText="";
   }
 
   send(){  //send the request to network
     this.responseText=network.send(this);
   }
 
-  send(string){
-      
+  send(data){
+    this.responseText=network.send(data,this);
   }
 }
 
