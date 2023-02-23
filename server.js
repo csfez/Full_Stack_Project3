@@ -29,12 +29,21 @@ class server{
         }
         if(req.method=='POST'){
             if(JSON.parse(req.body).type=="user"){
-                db.register(req.body);
+                res=db.register(req.body); //if its true as he managed to add
             }
             if(JSON.parse(req.body).type=="meeting"){
-                db.addNewMeeting(req.body);
+                res=db.addNewMeeting(req.body);  //if its true as he managed to add
+               
+            }
+            if(JSON.parse(req.body).type=="userSignIn"){
+                res=db.signIn(req.body);
             }
             
+        }
+        if(res){
+            req.status=200;
+        }else{
+            req.status=400;
         }
         return res;
     }

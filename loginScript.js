@@ -53,19 +53,19 @@ const app={
     document.querySelector('#sign_on').appendChild(clon);
   
     console.log(history.state)
-    if(currentPage=="sign_in"){
-      let SignInButton = listItem.getElementById('sign_in_btn');
-      SignInButton.addEventListener('click', signIn);
+    // if(currentPage=="sign_in"){
+    //   let SignInButton = listItem.getElementById('sign_in_btn');
+    //   SignInButton.addEventListener('click', signIn);
       
-    }
-    if(currentPage=="sign_up"){
-      let signUpButton = document.getElementById('register_btn');
-      signUpButton.addEventListener('click', addUser);
-    }
+    // }
+    // if(currentPage=="sign_up"){
+    //   let signUpButton = document.getElementById('register_btn');
+    //   signUpButton.addEventListener('click', addUser);
+    // }
     
-    if(currentPage=="app"){
+    // if(currentPage=="app"){
 
-    }
+    // }
      history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
@@ -115,10 +115,10 @@ document.addEventListener('DOMContentLoaded', app.init);
 //   }
 // }
 
-// function cleanInputs() {
-//   document.getElementById('uname').value = "";
-//   document.getElementById('psw').value = "";
-// }
+function cleanInputs() {
+  document.getElementById('uname').value = "";
+  document.getElementById('psw').value = "";
+}
 
 function addUser(){
   //test username
@@ -146,10 +146,12 @@ function addUser(){
   var user_json=JSON.stringify(user);
   var Fxml=new FXMLHttpRequest();
   Fxml.open("POST","dataBase.js",user_json,true);
-  Fxml.send(user_json);
-    // userArray.push(user);
-  // localStorage.setItem('all_users',JSON.stringify(userArray));
-  // return true;
+  var res=Fxml.send(user_json);
+  if(res){
+    alert("your account has been created")
+  }
+  cleanInputs();
+
 }
 
 
@@ -183,22 +185,36 @@ function checkPassword(psw) {
 }
 
 
-// function signIn(){
-//   username = document.getElementById('uname').value;
-//   psw = document.getElementById('psw').value;
+function signIn(){
+  username = document.getElementById('uname').value;
+  psw = document.getElementById('psw').value;
+  
+  let user={
+    type:"userSignIn",
+    name:username,
+    password:psw,
+  };
 
-//   for (const user of userArray){
-//     if(user.name===username){
-//       if(user.password===psw){
-//         cleanInputs();
-//         window.location.replace("./client.html");
-//         sessionStorage.setItem("cuurentUser",username);
-//         addEventListener('click',app.nav);
-//         return;
-//       }
-//       alert("wrong password");
-//       return;
-//     }
-//   }
-//   alert("user name does not exist");
-// }
+  var user_json=JSON.stringify(user);  
+  var Fxml=new FXMLHttpRequest();
+  Fxml.open("POST","dataBase.js",user_json,true);
+  var res=Fxml.send(user_json);
+  if(res){
+    
+  }
+
+  // for (const user of userArray){
+  //   if(user.name===username){
+  //     if(user.password===psw){
+  //       cleanInputs();
+  //       window.location.replace("./client.html");
+  //       sessionStorage.setItem("cuurentUser",username);
+  //       addEventListener('click',app.nav);
+  //       return;
+  //     }
+  //     alert("wrong password");
+  //     return;
+  //   }
+  // }
+  // alert("user name does not exist");
+}
