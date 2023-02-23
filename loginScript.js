@@ -141,10 +141,10 @@ function addUser(){
      meetings:[]
     };
 
-// var user_json=JSON.stringify(user);
+  var user_json=JSON.stringify(user);
   var Fxml=new FXMLHttpRequest();
-  Fxml.open("POST","FXMLHttpRequest.js",true);
-  Fxml.send(user);
+  Fxml.open("POST","dataBase.js",true);
+  Fxml.send(user_json);
     // userArray.push(user);
   // localStorage.setItem('all_users',JSON.stringify(userArray));
   // return true;

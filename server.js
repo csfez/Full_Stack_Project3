@@ -1,4 +1,5 @@
 import {dataBase} from "./dataBase.js"
+
 export function hendleRequest(req){
     var res;
     if(req.method=='GET'){
