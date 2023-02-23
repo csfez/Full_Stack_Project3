@@ -8,6 +8,7 @@ class FXMLHttpRequest{
     this.url=url;
     this.body=body;
     this.async=async;
+    this.readyState=0;
     this.status=0;
     this.responseText="";
   }

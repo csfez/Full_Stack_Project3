@@ -62,9 +62,10 @@ function initialize(){
   }
 }
 
-function register(){
-  username = document.getElementById('uname').value;
-  psw = document.getElementById('psw').value;
+function register(user){
+  user_obj=JSON.parse(user);
+  username = user.name;
+  psw = user.password;
 
   for (const user of userArray){
     if(user.name===username){
@@ -72,12 +73,18 @@ function register(){
       return;
     }
   }
-  if(addData()){
-    cleanInputs();
-    // window.location.replace('client.html');
-    addEventListener('click',app.nav);
-    sessionStorage.setItem("currentUser",username);
-  }
+
+  userArray.push(user);
+  localStorage.setItem('users',JSON.stringify(userArray));
+  sessionStorage.setItem("currentUser",username);
+  return;
+
+  // if(addData()){
+  //   cleanInputs();
+  //   // window.location.replace('client.html');
+  //   addEventListener('click',app.nav);
+  //   sessionStorage.setItem("currentUser",username);
+  // }
 }
 
 function cleanInputs() {
@@ -85,30 +92,30 @@ function cleanInputs() {
   document.getElementById('psw').value = "";
 }
 
-function addData(){
-  //test username
-  let tesRegex=  /^[A-Za-z]\w*$/;
-  if(!username.match(tesRegex)) 
-  { 
-    alert("username must tart with a letter and contain only characters, digits and underscore");
-    return false;
-  }
+// function addData(){
+//   //test username
+//   let tesRegex=  /^[A-Za-z]\w*$/;
+//   if(!username.match(tesRegex)) 
+//   { 
+//     alert("username must tart with a letter and contain only characters, digits and underscore");
+//     return false;
+//   }
 
-  //test password
-  if (!checkPassword(psw)){
-    return false;
-  }
+//   //test password
+//   if (!checkPassword(psw)){
+//     return false;
+//   }
 
-  let user={
-    name:username,
-     password:psw, 
-     tasks:[]
-    };
+//   let user={
+//     name:username,
+//      password:psw, 
+     
+//     };
   
-  userArray.push(user);
-  localStorage.setItem('users',JSON.stringify(userArray));
-  return true;
-}
+//   userArray.push(user);
+//   localStorage.setItem('users',JSON.stringify(userArray));
+//   return true;
+// }
 
 function checkPassword(psw) {
   const isWhitespace = /^(?=.*\s)/;

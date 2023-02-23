@@ -136,9 +136,10 @@ function addUser(){
   }
 
   let user={
-    name:username,
-     password:psw, 
-     meetings:[]
+      type:"user",
+      name:username,
+      password:psw, 
+      meetings:[]
     };
 
   var user_json=JSON.stringify(user);

@@ -9,11 +9,14 @@ export function sendAsync(req,callback){
 }
 
 export function send(req){
+    req.readyState=1; //server connection established
     const _server=new server();
     const res=_server.hendleRequest(req);
     downloading();
     return res;
 }
+
+
 function delay(ms){
     var start=Date.now(),
     now=start;
