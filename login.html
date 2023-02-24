@@ -4,13 +4,51 @@
   <head>
     <title>Playcountry Login Page</title>
     <link rel="stylesheet" href="loginStyle.css">
-    
+    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
+    <a href="client.html"></a>
 
   </head>
 
   <body>
-    <main>
-      <div class="login-form">
+    <main id="main">
+      
+
+      <template id="sign_in">
+        <div id="sign_in_div" >
+          <div class="login-form">
+            <img src="https://assets-global.website-files.com/62196607bf1b46c300301846/62196607bf1b46ebfb301f19_5f5bc69416e7fb495275b378_how%2520leaders%2520run%2520meetings%2520tips%2520from%2520top%2520execs.jpeg" class="login_img"/>
+            
+              <div class="page active" id="sign_on">
+                <div class="tab">
+                  <button class="btn" data-target="sign_in">Sign in</button>
+                  <button  class="btn" data-target="sign_up">Register</button>
+                </div>
+                  <form>
+                    <h1>Sign in</h1>
+
+                    <div class="content">
+                      <div class="input-field">
+                        <input id="uname" type="userName" placeholder="User Name" required>
+                      </div>
+                      <div class="input-field">
+                        <input id="psw" type="password" placeholder="Password" required>
+                      </div>
+                    </div>
+
+                    <div class="action">
+                      <button class="btn" id="sign_in_btn" data-target="app" onclick="signIn()">Sign in</button>
+                    </div>
+
+                </form> 
+              </div>
+    </div>
+     </template>
+
+     <template id="sign_up">
+      <div id="sign_up_div">
+        <div class="login-form">
           <img src="https://assets-global.website-files.com/62196607bf1b46c300301846/62196607bf1b46ebfb301f19_5f5bc69416e7fb495275b378_how%2520leaders%2520run%2520meetings%2520tips%2520from%2520top%2520execs.jpeg" class="login_img"/>
           
             <div class="page active" id="sign_on">
@@ -18,35 +56,6 @@
                 <button class="btn" data-target="sign_in">Sign in</button>
                 <button  class="btn" data-target="sign_up">Register</button>
               </div>
-            <!-- <template id="sign_in">
-              <form>
-                <h1>Sign in</h1>
-
-                <div class="content">
-                  <div class="input-field">
-                    <input id="uname" type="userName" placeholder="User Name" required>
-                  </div>
-                  <div class="input-field">
-                    <input id="psw" type="password" placeholder="Password" required>
-                  </div>
-                </div>
-
-                <div class="action">
-                  <button id="sign_in_btn" data-target="app">Sign in</button>
-                </div>
-
-            </form> 
-           </template> -->
-            </div> 
-        
-
-          
-            <!-- <div class="page" id="sign_up">
-              <div class="tab">
-                <button class="btn" data-target="sign_in">Sign in</button>
-                <button class="btn" data-target="sign_up">Register</button>
-              </div>
-              <template id="sign_up">
               <h1>Register</h1>
               <form >
                 <div class="content">
@@ -61,63 +70,175 @@
                   <label>Must contain a number or special character.</label><br>
                 </div>
                 <div class="action">
-                  <button id="register_btn">Register</button>
+                  <button id="register_btn" onclick="addUser()">Register</button>
                 </div>
               </form>
-             </template>
-          </div> -->
-        
+              </div> 
+        </div>
+     </template>
+
+     <template id="app">
+      <div id="app_div">
+        <div class="task-manager">
+          <!-- left bar starts -->
+          <div class="left-bar">
+            <div class="upper-part">
+              <div class="actions">
+                <div class="circle"></div>
+                <div class="circle-2"></div>
+              </div>
+            </div>
+
+            
+            <!-- left content starts -->
+            <div class="left-content">
+              <ul class="action-list">
+                
+                <li class="item">
+                  <img class="feather feather-calendar" src="svg/calender.svg" alt="" />
+                  <span>
+                    <i class="fa-solid fa-clipboard-list-check"></i>
+                    All meetings
+                </span>
+                </li>
+                <li class="item">
+                  <img class="feather feather-hash" src="svg/hash.svg" alt="" />
+                  <span>Important</span>
+                </li>
+                <li class="item">
+                  <img class="feather feather-users" src="svg/users.svg" alt="" />
+                  <span> Add new meeting</span>
+                  <!-- <button class="btn" id="Add_new_meeting" onclick="addNewMeeting()" data-target="app">Add new meeting</button> -->
+                </li>
+                <li class="item">
+                  <img class="feather feather-trash" src="svg/trash.svg" alt="" />
+                  <span>Trash</span>
+                </li>
+              </ul>
+            </div>
+            <!-- left content ends -->
+          </div>
+          <!--  -->
+          <!-- left bar ends -->
+
+          <!-- page content starts -->
+          <div class="page-content">
+             
+                <label class="category header" for="opt-2">Today Meetings</label>
+            
+            <!-- tasks wrapper starts -->
+            <div class="meetings-wrapper" id="meetings">
+               
+           <!--    <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-1" checked />
+                <label for="item-1">
+                  <span class="label-text">Dashboard Design Implementation</span>
+                </label>
+                <span class="tag approved">Approved</span>
+              </div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-2" checked />
+                <label for="item-2">
+                  <span class="label-text">Create a userflow</span>
+                </label>
+                <span class="tag progress">In Progress</span>
+              </div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-3" />
+                <label for="item-3">
+                  <span class="label-text">Application Implementation</span>
+                </label>
+                <span class="tag review">In Review</span>
+              </div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-4" />
+                <label for="item-4">
+                  <span class="label-text">Create a Dashboard Design</span>
+                </label>
+                <span class="tag progress">In Progress</span>
+              </div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-5" />
+                <label for="item-5">
+                  <span class="label-text">Create a Web Application Design</span>
+                </label>
+                <span class="tag approved">Approved</span>
+              </div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-6" />
+                <label for="item-6">
+                  <span class="label-text">Interactive Design</span>
+                </label>
+                <span class="tag review">In Review</span>
+              </div>
+              <div class="header upcoming">Upcoming Tasks</div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-7" />
+                <label for="item-7">
+                  <span class="label-text">Dashboard Design Implementation</span>
+                </label>
+                <span class="tag waiting">Waiting</span>
+              </div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-8" />
+                <label for="item-8">
+                  <span class="label-text">Create a userflow</span>
+                </label>
+                <span class="tag waiting">Waiting</span>
+              </div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-9" />
+                <label for="item-9">
+                  <span class="label-text">Application Implementation</span>
+                </label>
+                <span class="tag waiting">Waiting</span>
+              </div>
+              <div class="task">
+                <input class="task-item" name="task" type="checkbox" id="item-10" />
+                <label for="item-10">
+                  <span class="label-text">Create a Dashboard Design</span>
+                </label>
+                <span class="tag waiting">Waiting</span>
+              </div>-->
+            </div> 
+            <!-- tasks wrapper ends -->
+          </div>
+          <!--  -->
+          <!-- page content ends -->
+        </div>
+      </div>
+    </template>
+
+    <template id="add_new_meeting">
+      <div id="add_new_meeting_div">
+        <form>
+          
+          <div class="pb-2">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-row align-items-center">
+                  <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
+                    placeholder="Add new...">
+                  <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
+                      class="fas fa-calendar-alt fa-lg me-3"></i></a>
+                  <div>
+                    <button type="button" class="btn btn-primary">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
       </div>
 
-      <template id="sign_in">
-        <div id="sign_in_div" >
-        <form>
-          <h1>Sign in</h1>
-
-          <div class="content">
-            <div class="input-field">
-              <input id="uname" type="userName" placeholder="User Name" required>
-            </div>
-            <div class="input-field">
-              <input id="psw" type="password" placeholder="Password" required>
-            </div>
-          </div>
-
-          <div class="action">
-            <button id="sign_in_btn" data-target="app" >Sign in</button>
-          </div>
-
-      </form> 
-    </div>
-     </template>
-
-     <template id="sign_up">
-      <div id="sign_up_div">
-      <h1>Register</h1>
-      <form >
-        <div class="content">
-          <div class="input-field">
-            <input id="uname" type="userName" placeholder="User Name" required>
-          </div>
-          <div class="input-field">
-            <input id="psw" type="password" placeholder="Password" required>
-          </div>
-          <label>Must contain a lowercase letter.</label><br>
-          <label>Must contain an uppercase letter.</label><br>
-          <label>Must contain a number or special character.</label><br>
-        </div>
-        <div class="action">
-          <button id="register_btn" onclick="addUser()">Register</button>
-        </div>
-      </form>
-      </div> 
-     </template>
+    </template>
   </main>
     <script src="loginScript.js"></script>
     <script src="server.js"></script>
     <script src="network.js"></script>
     <script src="FXMLHttpRequest.js"></script>
     <script src="dataBase.js"></script>
-
+    
   </body>
 </html>

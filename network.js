@@ -59,7 +59,7 @@ class network{
     
     downloading(during=3000){
         console.log("downloading...");
-        delay(during);
+        this.delay(during);
         console.log("finished downloading");
     }
 }

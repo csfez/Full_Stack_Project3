@@ -2,7 +2,7 @@
 
 class dataBase{
  
-    constructor(){
+  constructor(){
       this.userArray=localStorage.getItem('users');
       this.meetingArray=localStorage.getItem('meetings');
       this.meetingId=localStorage.getItem('meetingId');
@@ -10,8 +10,8 @@ class dataBase{
       if(this.userArray===null){
         this.userArray = new Array();
         this.meetingArray=new Array();
-        localStorage.setItem('users',JSON.stringify(userArray));
-        localStorage.setItem('meetings',JSON.stringify(meetingArray));
+        localStorage.setItem('users',JSON.stringify(this.userArray));
+        localStorage.setItem('meetings',JSON.stringify(this.meetingArray));
         localStorage.setItem('meetingId',0);
       }
       else{
@@ -59,6 +59,7 @@ class dataBase{
       document.getElementById('psw').value = "";
     }
 
+    
     // function addData(){
     //   //test username
     //   let tesRegex=  /^[A-Za-z]\w*$/;
@@ -123,7 +124,7 @@ class dataBase{
         if(JSON.parse(user).name===username){
           if(JSON.parse(user).password===psw){
             
-            sessionStorage.setItem("cuurentUser",username);
+            sessionStorage.setItem("currentUser",username);
             
             return true;
           }
@@ -134,10 +135,53 @@ class dataBase{
       alert("user name does not exist");
     }
 
-    addNewMeeting(){
+    addNewMeeting(meet){
+      var meeting_obj=JSON.parse(meet);
+      var title = meeting_obj.title;
+      var date = meeting_obj.date;
+      var importance_level=meeting_obj.importance_level;
+
       let currentUser=sessionStorage.getItem('currentUser');
-      var storedUsers = JSON.parse(localStorage.getItem("users"));
-      var storedTasks =  JSON.parse(localStorage.getItem("tasks"));
-      document.getElementById
+      for (const user of this.userArray){
+        if(JSON.parse(user).name===currentUser){
+          //put the id of the meeting in the user object
+          u=JSON.parse(user);
+          u.meetings.push(this.meetingId);
+          
+          //create the meeting in the meeting array
+          var meeting={
+            meetingId:this.meetingId,
+            title:title,
+            date:date,
+            importance_level:importance_level
+          };
+          this.meetingArray.push(meeting);
+          localStorage.setItem('meetings',JSON.stringify(this.meetingArray));
+          localStorage.setItem('meetingId',this.meetingId+1);
+          return true;
+
+        }
+      }
+
+    }
+
+    deleteMeeting(meeting){
+      var meeting_obj=JSON.parse(meet);
+      var id = meeting_obj.meetingId;
+
+      let currentUser=sessionStorage.getItem('currentUser');
+      for (const user of this.userArray){
+        if(JSON.parse(user).name===currentUser){
+          //delete from currentuser list 
+          u_obj=JSON.parse(user);
+
+          const index = u_obj.meetings.indexOf(id);
+
+          const x = u_obj.meetings.splice(index, 1);
+          
+
+
+        }
+      }
     }
 }
