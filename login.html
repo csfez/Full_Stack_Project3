@@ -79,6 +79,7 @@
 
      <template id="app">
       <div id="app_div">
+
         <div class="task-manager">
           <!-- left bar starts -->
           <div class="left-bar">
@@ -108,7 +109,8 @@
                 <li class="item">
                   <img class="feather feather-users" src="svg/users.svg" alt="" />
                   <span> Add new meeting</span>
-                  <!-- <button class="btn" id="Add_new_meeting" onclick="addNewMeeting()" data-target="app">Add new meeting</button> -->
+                  <button class="btn" id="add_new_meeting" data-target="add_new_meeting" onclick="newMeeting()">Add new meeting</button>
+                 
                 </li>
                 <li class="item">
                   <img class="feather feather-trash" src="svg/trash.svg" alt="" />
@@ -212,22 +214,25 @@
     <template id="add_new_meeting">
       <div id="add_new_meeting_div">
         <form>
-          
-          <div class="pb-2">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex flex-row align-items-center">
-                  <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
-                    placeholder="Add new...">
-                  <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
-                      class="fas fa-calendar-alt fa-lg me-3"></i></a>
-                  <div>
-                    <button type="button" class="btn btn-primary">Add</button>
-                  </div>
-                </div>
-              </div>
+          <div class="content">
+            <div class="input-field">
+              <input id="title" type="userName" placeholder="User Name" required>
             </div>
-          </div>
+            <div class="content">
+              <div class="input-field">
+                <input type="date" id="date" name="trip-start">
+            </div>
+            <div class="content">
+              <div class="input-field">
+                <select id="level">
+                  <option value="1">High priority</option>
+                  <option value="2">Middle priority</option>
+                  <option value="3">Low priority</option>
+              </select>
+            </div>
+            <div class="action">
+              <button class="btn" data-target="app" id="addNewMeeting_btn" onclick="addNewMeeting()">Add new meeting</button>
+            </div>
         </form>
 
       </div>

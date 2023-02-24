@@ -23,7 +23,9 @@ const app={
 
   nav:function(ev){
 
+    console.log(history.state);
     ev.preventDefault();
+    
     let currentPage = ev.target.getAttribute('data-target');
     var temp = document.querySelector(`#${currentPage}`);
     var clon = temp.content.cloneNode(true);
@@ -183,10 +185,18 @@ function signIn(){
   }
 }
 
+function newMeeting(){
+  app.init();
+}
+
 function addNewMeeting(){
+
   title = document.getElementById('title').value;
   date = document.getElementById('date').value;
-  importance_level=document.getElementById('level').value;
+  level=document.getElementById('level').value;
+  const importance_level = [].filter
+                .call(level.options, option => option.selected)
+                .map(option => option.text);
   let meeting={
     type:"add_meeting",
     title:title,
