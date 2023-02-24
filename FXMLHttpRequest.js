@@ -21,18 +21,8 @@ class FXMLHttpRequest{
 
   send(data){
     var net=new network()
-    this.responseText=net.send(this);
+    var res=this.responseText=net.send(this);
+    return res;
   }
 }
 
-
-/* const xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://github.com/csfez/Full_Stack_Project3/blob/main/dataBase.js');
-
-xhr.onload = () => {
-    var ourData =ourRequest.responseText;
-    console.log(ourData);
-  // Request finished. Do processing here.
-};
-
-xhr.send(null); */

@@ -1,6 +1,11 @@
 //localStorage.clear();
 // import {FXMLHttpRequest} from "Full_Stack_Project3\FXMLHttpRequest.js"
 // import FXMLHttpRequest from 'Full_Stack_Project3\FXMLHttpRequest.js'
+   var temp = document.querySelector('#sign_in');
+    var clon = temp.content.cloneNode(true);
+    document.querySelector('#main').appendChild(clon);
+    currentPage='sign_in';
+
 const app={
   // pages:[],
   // show:new Event('show'),
@@ -13,21 +18,7 @@ const app={
       button.addEventListener('click', app.nav);
     })
 
-    var temp = document.querySelector('#sign_in');
-    var clon = temp.content.cloneNode(true);
-    document.querySelector('#sign_on').appendChild(clon);
-
-    let username;
-    let psw;
-    let userArray;
-
-    // let registerButton = document.getElementById('sign_in_btn');
-    // let signInButton = document.getElementById('register_btn');
-    // registerButton.addEventListener('click', register);
-    // signInButton.addEventListener('click', signIn);
-    // initialize();
-    history.replaceState("sign_in_div", 'Home', '#sign_in');
-    
+    history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
   nav:function(ev){
@@ -49,23 +40,11 @@ const app={
     // var listItemTempOld = document.importNode(tempOld.content, true);
 
     // listItemTempOld.getElementById("div_temp").innerHTML="";
-    document.querySelector('#sign_on').removeChild(tempOld);
-    document.querySelector('#sign_on').appendChild(clon);
+    document.querySelector('#main').removeChild(tempOld);
+    document.querySelector('#main').appendChild(clon);
   
     console.log(history.state)
-    // if(currentPage=="sign_in"){
-    //   let SignInButton = listItem.getElementById('sign_in_btn');
-    //   SignInButton.addEventListener('click', signIn);
-      
-    // }
-    // if(currentPage=="sign_up"){
-    //   let signUpButton = document.getElementById('register_btn');
-    //   signUpButton.addEventListener('click', addUser);
-    // }
-    
-    // if(currentPage=="app"){
-
-    // }
+   
      history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
@@ -200,21 +179,27 @@ function signIn(){
   Fxml.open("POST","dataBase.js",user_json,true);
   var res=Fxml.send(user_json);
   if(res){
-    
+    app.init();
+  }
+}
+
+function addNewMeeting(){
+  title = document.getElementById('title').value;
+  date = document.getElementById('date').value;
+  importance_level=document.getElementById('level').value;
+  let meeting={
+    type:"add_meeting",
+    title:title,
+    date:date,
+    importance_level:importance_level
+  };
+
+  var meeting_json=JSON.stringify(meeting);  
+  var Fxml=new FXMLHttpRequest();
+  Fxml.open("POST","dataBase.js",meeting_json,true);
+  var res=Fxml.send(meeting_json);
+  if(res){
+    alert('meeting saves')
   }
 
-  // for (const user of userArray){
-  //   if(user.name===username){
-  //     if(user.password===psw){
-  //       cleanInputs();
-  //       window.location.replace("./client.html");
-  //       sessionStorage.setItem("cuurentUser",username);
-  //       addEventListener('click',app.nav);
-  //       return;
-  //     }
-  //     alert("wrong password");
-  //     return;
-  //   }
-  // }
-  // alert("user name does not exist");
 }

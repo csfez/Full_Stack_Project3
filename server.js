@@ -31,14 +31,16 @@ class server{
             if(JSON.parse(req.body).type=="user"){
                 res=db.register(req.body); //if its true as he managed to add
             }
-            if(JSON.parse(req.body).type=="meeting"){
+            if(JSON.parse(req.body).type=="add_meeting"){
                 res=db.addNewMeeting(req.body);  //if its true as he managed to add
-               
             }
             if(JSON.parse(req.body).type=="userSignIn"){
                 res=db.signIn(req.body);
             }
-            
+             
+        }
+        if(req.method=='DELETE'){
+            res=db.deleteMeeting(req.body);
         }
         if(res){
             req.status=200;
