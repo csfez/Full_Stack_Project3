@@ -44,9 +44,15 @@ const app={
     // listItemTempOld.getElementById("div_temp").innerHTML="";
     document.querySelector('#main').removeChild(tempOld);
     document.querySelector('#main').appendChild(clon);
-  
+    
+    document.querySelectorAll('.btn').forEach((button)=>{
+      button.addEventListener('click', app.nav);
+    })
     console.log(history.state)
-   
+    // window.addEventListener('init', app.init);
+    // document.getElementById(`${currentPage}_div`).dispatchEvent(app.init);
+
+
      history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
@@ -54,8 +60,8 @@ const app={
  
 }
 
-
 document.addEventListener('DOMContentLoaded', app.init);
+
 
 // let username;
 // let psw;

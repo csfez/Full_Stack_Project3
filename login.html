@@ -13,7 +13,8 @@
 
   <body>
     <main id="main">
-      
+
+    </main>
 
       <template id="sign_in">
         <div id="sign_in_div" >
@@ -109,7 +110,7 @@
                 <li class="item">
                   <img class="feather feather-users" src="svg/users.svg" alt="" />
                   <span> Add new meeting</span>
-                  <button class="btn" id="add_new_meeting" data-target="add_new_meeting" onclick="newMeeting()">Add new meeting</button>
+                  <button class="btn" data-target="add_new_meeting">add new meeting</button>
                  
                 </li>
                 <li class="item">
@@ -129,7 +130,7 @@
                 <label class="category header" for="opt-2">Today Meetings</label>
             
             <!-- tasks wrapper starts -->
-            <div class="meetings-wrapper" id="meetings">
+          <div class="meetings-wrapper" id="meetings">
                
            <!--    <div class="task">
                 <input class="task-item" name="task" type="checkbox" id="item-1" checked />
@@ -238,7 +239,7 @@
       </div>
 
     </template>
-  </main>
+ 
     <script src="loginScript.js"></script>
     <script src="server.js"></script>
     <script src="network.js"></script>
