@@ -54,10 +54,10 @@ class dataBase{
 
     }
 
-    cleanInputs() {
-      document.getElementById('uname').value = "";
-      document.getElementById('psw').value = "";
-    }
+    // cleanInputs() {
+    //   document.getElementById('uname').value = "";
+    //   document.getElementById('psw').value = "";
+    // }
 
     
     // function addData(){
@@ -142,12 +142,21 @@ class dataBase{
       var importance_level=meeting_obj.importance_level;
 
       let currentUser=sessionStorage.getItem('currentUser');
-      for (const user of this.userArray){
-        if(JSON.parse(user).name===currentUser){
-          //put the id of the meeting in the user object
-          u=JSON.parse(user);
-          u.meetings.push(this.meetingId);
-          
+
+      objIndex = this.userArray.findIndex((obj => obj.name == currentUser));
+
+      //Log object to Console.
+      console.log("Before update: ", myArray[objIndex])
+
+      //Update object's name property.
+      this.userArray[objIndex].meetings =this.userArray[objIndex].meetings.push(this.meetingId);
+
+      // for (const user of this.userArray){
+      //   if(JSON.parse(user).name===currentUser){
+      //     //put the id of the meeting in the user object
+      //     var u=JSON.parse(user);
+      //     u.meetings.push(this.meetingId);
+        // } } 
           //create the meeting in the meeting array
           var meeting={
             meetingId:this.meetingId,
@@ -155,13 +164,16 @@ class dataBase{
             date:date,
             importance_level:importance_level
           };
+       
           this.meetingArray.push(meeting);
+          localStorage.setItem('users',JSON.stringify(this.userArray));
           localStorage.setItem('meetings',JSON.stringify(this.meetingArray));
-          localStorage.setItem('meetingId',this.meetingId+1);
+          this.meetingId=parseInt(this.meetingId, 10)+1
+          localStorage.setItem('meetingId',this.meetingId);
           return true;
 
-        }
-      }
+       
+      
 
     }
 
@@ -184,4 +196,27 @@ class dataBase{
         }
       }
     }
+
+  get(){
+    var list_meetingsId_current_user=[];
+    var list_meetings=[]
+    let currentUser=sessionStorage.getItem('currentUser');
+    for (const user of this.userArray){
+      if(JSON.parse(user).name===currentUser){
+        list_meetingsId_current_user.push(JSON.parse(user).meetings)
+      }
+    }
+    if(this.meetingArray!=null){
+      for(const meetingId of list_meetingsId_current_user){
+          for(const meeting of this.meetingArray){
+            if(JSON.parse(meeting).meetingId==meetingId){
+              list_meetings.push(meeting);
+            }
+          }
+        }
+      }
+      return list_meetings;
+  }
+  
+ 
 }
