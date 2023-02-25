@@ -44,7 +44,7 @@ const app={
     // listItemTempOld.getElementById("div_temp").innerHTML="";
     document.querySelector('#main').removeChild(tempOld);
     document.querySelector('#main').appendChild(clon);
-    
+
     document.querySelectorAll('.btn').forEach((button)=>{
       button.addEventListener('click', app.nav);
     })
@@ -56,9 +56,8 @@ const app={
      history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
-
- 
 }
+
 
 document.addEventListener('DOMContentLoaded', app.init);
 
@@ -187,27 +186,31 @@ function signIn(){
   Fxml.open("POST","dataBase.js",user_json,true);
   var res=Fxml.send(user_json);
   if(res){
+    var button=document.getElementById('sign_in_btn');
+    button.dataset.target="app"
     app.init();
+  }else{
+    cleanInputs();
   }
 }
 
-function newMeeting(){
-  app.init();
-}
+// function newMeeting(){
+//   app.init();
+// }
 
 function addNewMeeting(){
 
   title = document.getElementById('title').value;
   date = document.getElementById('date').value;
   level=document.getElementById('level').value;
-  const importance_level = [].filter
-                .call(level.options, option => option.selected)
-                .map(option => option.text);
+  // const importance_level = [].filter
+  //               .call(level.options, option => option.selected)
+  //               .map(option => option.text);
   let meeting={
     type:"add_meeting",
     title:title,
     date:date,
-    importance_level:importance_level
+    importance_level:level
   };
 
   var meeting_json=JSON.stringify(meeting);  
@@ -217,5 +220,14 @@ function addNewMeeting(){
   if(res){
     alert('meeting saves')
   }
+}
 
+
+function showMeetings(){
+  var Fxml=new FXMLHttpRequest();
+  Fxml.open("GET","dataBase.js",null,true);
+  var res=Fxml.send();
+  if(res){
+  
+  }
 }

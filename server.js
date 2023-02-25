@@ -25,7 +25,8 @@ class server{
         req.readyState=2; //request received
         var res;
         if(req.method=='GET'){
-           res= db.get(req.body);
+            
+            res= db.get(req.body);
         }
         if(req.method=='POST'){
             if(JSON.parse(req.body).type=="user"){

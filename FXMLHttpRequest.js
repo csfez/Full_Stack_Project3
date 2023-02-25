@@ -16,7 +16,9 @@ class FXMLHttpRequest{
 
   send(){  //send the request to network
     var net=new network()
-    this.responseText=net.send(this);
+    var res=this.responseText=net.send(this);
+    return res;
+
   }
 
   send(data){

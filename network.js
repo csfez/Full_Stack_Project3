@@ -44,7 +44,7 @@ class network{
         req.readyState=1; //server connection established
         var _server=new server();
         const res=_server.hendleRequest(req);
-        this.downloading();
+        // this.downloading();
         return res;
     }
     
