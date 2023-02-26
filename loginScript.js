@@ -1,4 +1,4 @@
-//localStorage.clear();
+localStorage.clear();
 // import {FXMLHttpRequest} from "Full_Stack_Project3\FXMLHttpRequest.js"
 // import FXMLHttpRequest from 'Full_Stack_Project3\FXMLHttpRequest.js'
 var temp = document.querySelector('#sign_in');

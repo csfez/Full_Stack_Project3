@@ -191,13 +191,13 @@ class dataBase{
     //var list_tasksId_current_user=[];
     var list_tasks=[]
     let currentUser=sessionStorage.getItem('currentUser');
-    if(this.taskArray.length!=0){
+    //if(this.taskArray.length!=0){
       for(const task of this.taskArray){
           if(task.username==currentUser){
               list_tasks.push(task);
             }
           }
-        }
+       // }
     /* for (const user of this.userArray){
       if(JSON.parse(user).name===currentUser){
         list_meetingsId_current_user.push(JSON.parse(user).meetings)
