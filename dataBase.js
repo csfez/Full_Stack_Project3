@@ -143,7 +143,7 @@ class dataBase{
 
       let currentUser=sessionStorage.getItem('currentUser');
 
-      objIndex = this.userArray.findIndex((obj => obj.name == currentUser));
+      objIndex = JSON.parse(this.userArray).findIndex((obj => obj.name == currentUser));
 
       //Log object to Console.
       console.log("Before update: ", myArray[objIndex])
@@ -151,12 +151,13 @@ class dataBase{
       //Update object's name property.
       this.userArray[objIndex].meetings =this.userArray[objIndex].meetings.push(this.meetingId);
 
-      // for (const user of this.userArray){
-      //   if(JSON.parse(user).name===currentUser){
-      //     //put the id of the meeting in the user object
-      //     var u=JSON.parse(user);
-      //     u.meetings.push(this.meetingId);
-        // } } 
+      for (const user of this.userArray){
+        if(JSON.parse(user).name===currentUser){
+          //put the id of the meeting in the user object
+          var u=JSON.parse(user);
+          u.meetings.push(this.meetingId);
+        }
+       } 
           //create the meeting in the meeting array
           var meeting={
             meetingId:this.meetingId,
