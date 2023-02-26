@@ -1,22 +1,20 @@
-
-
 class dataBase{
  
   constructor(){
       this.userArray=localStorage.getItem('users');
-      this.meetingArray=localStorage.getItem('meetings');
+      this.taskArray=localStorage.getItem('tasks');
       this.meetingId=localStorage.getItem('meetingId');
 
       if(this.userArray===null){
         this.userArray = new Array();
-        this.meetingArray=new Array();
+        this.taskArray=new Array();
         localStorage.setItem('users',JSON.stringify(this.userArray));
-        localStorage.setItem('meetings',JSON.stringify(this.meetingArray));
-        localStorage.setItem('meetingId',0);
+        localStorage.setItem('tasks',JSON.stringify(this.taskArray));
+        localStorage.setItem('taskId',0);
       }
       else{
         this.userArray=JSON.parse(this.userArray);
-        this.meetingArray=JSON.parse(this.meetingArray);
+        this.taskArray=JSON.parse(this.taskArray);
 
         // var objusers = JSON.parse(this.userArray);
         
@@ -135,21 +133,32 @@ class dataBase{
       alert("user name does not exist");
     }
 
-    addNewMeeting(meet){
-      var meeting_obj=JSON.parse(meet);
-      var title = meeting_obj.title;
-      var date = meeting_obj.date;
-      var importance_level=meeting_obj.importance_level;
+    addNewTask(task_){
+      var task_obj=JSON.parse(task_);
+      var title = task_obj.title;
+      var username = task_obj.username;
 
-      let currentUser=sessionStorage.getItem('currentUser');
+      //let currentUser=sessionStorage.getItem('currentUser');
 
-      objIndex = this.userArray.findIndex((obj => obj.name == currentUser));
+     /*  const currentUser=sessionStorage.getItem("currentUser");
+      let userArray=localStorage.getItem('users');
+      userArray=JSON.parse(userArray);
+  
+      for (const user of userArray){
+          if(user.name===currentUser){  
+            //Update object's name property.
+              JSON.parse(user.tasks) = JSON.parse(user.meetings).push(this.meetingId);
+             
+              localStorage.setItem('users',JSON.stringify(userArray));
+          }
+          } */
+                 
+     // objIndex = this.userArray.findIndex((obj => obj.name == currentUser));
 
       //Log object to Console.
-      console.log("Before update: ", myArray[objIndex])
+      //console.log("Before update: ", myArray[objIndex])
 
-      //Update object's name property.
-      this.userArray[objIndex].meetings =this.userArray[objIndex].meetings.push(this.meetingId);
+    
 
       // for (const user of this.userArray){
       //   if(JSON.parse(user).name===currentUser){
@@ -158,50 +167,50 @@ class dataBase{
       //     u.meetings.push(this.meetingId);
         // } } 
           //create the meeting in the meeting array
-          var meeting={
-            meetingId:this.meetingId,
+          var task={
+            //meetingId:this.meetingId,
             title:title,
-            date:date,
-            importance_level:importance_level
+            username:username
+            //date:date,
+            //importance_level:importance_level
           };
        
-          this.meetingArray.push(meeting);
-          localStorage.setItem('users',JSON.stringify(this.userArray));
-          localStorage.setItem('meetings',JSON.stringify(this.meetingArray));
-          this.meetingId=parseInt(this.meetingId, 10)+1
-          localStorage.setItem('meetingId',this.meetingId);
+          this.taskArray.push(task);
+          //localStorage.setItem('users',JSON.stringify(this.userArray));
+          localStorage.setItem('tasks',JSON.stringify(this.taskArray));
+          //this.meetingId=parseInt(this.meetingId, 10)+1
+          //localStorage.setItem('meetingId',this.meetingId);
           return true;
-
-       
-      
 
     }
 
-    deleteMeeting(meeting){
-      var meeting_obj=JSON.parse(meet);
-      var id = meeting_obj.meetingId;
+    deleteTask(task_){
+      var task_obj=JSON.parse(task_);
+      var title = task_obj.title;
+      var username=task_obj.username;
 
-      let currentUser=sessionStorage.getItem('currentUser');
-      for (const user of this.userArray){
-        if(JSON.parse(user).name===currentUser){
+      //let currentUser=sessionStorage.getItem('currentUser');
+      for (var i = 0; i < this.taskArray.length; i++){
+        if(this.taskArray[i].username===username && this.taskArray[i].title===title){
           //delete from currentuser list 
-          u_obj=JSON.parse(user);
-
-          const index = u_obj.meetings.indexOf(id);
-
-          const x = u_obj.meetings.splice(index, 1);
-          
-
-
+          this.taskArray.splice(i, 1); 
+          i--; 
         }
       }
     }
 
-  get(){
-    var list_meetingsId_current_user=[];
-    var list_meetings=[]
+  getAllTasks(){
+    //var list_tasksId_current_user=[];
+    var list_tasks=[]
     let currentUser=sessionStorage.getItem('currentUser');
-    for (const user of this.userArray){
+    if(this.taskArray!=null){
+      for(const task of this.taskArray){
+          if(JSON.parse(task).username==currentUser){
+            list_tasks.push(task);
+            }
+          }
+        }
+    /* for (const user of this.userArray){
       if(JSON.parse(user).name===currentUser){
         list_meetingsId_current_user.push(JSON.parse(user).meetings)
       }
@@ -214,8 +223,40 @@ class dataBase{
             }
           }
         }
+      } */
+      return list_tasks;
+  }
+
+  getUser(user_){
+    var user_obj=JSON.parse(user_);
+    username = user_obj.name;
+    psw = user_obj.password;
+
+    for (const user of this.userArray){
+      if(JSON.parse(user).name===username){
+        if(JSON.parse(user).password===psw){
+          sessionStorage.setItem("currentUser",username);
+          return user;
+
+        }
+        }
       }
-      return list_meetings;
+  }
+
+  getTask(task_){
+    var task_obj=JSON.parse(task_);
+    username = task_obj.username;
+    title = task_obj.title;
+    for (const task of this.taskArray){
+      if(JSON.parse(task).username===username){
+        if(JSON.parse(task).title===title){
+          sessionStorage.setItem("task",title);
+          return task;}
+        }
+      }
+  }
+  updateUser(user){
+
   }
   
  

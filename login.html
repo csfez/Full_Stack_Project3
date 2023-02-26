@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title>Playcountry Login Page</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="loginStyle.css">
     <link rel="stylesheet" href="style.css" />
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
@@ -80,163 +80,23 @@
 
      <template id="app">
       <div id="app_div">
-
-        <div class="task-manager">
-          <!-- left bar starts -->
-          <div class="left-bar">
-            <div class="upper-part">
-              <div class="actions">
-                <div class="circle"></div>
-                <div class="circle-2"></div>
-              </div>
-            </div>
-
-            
-            <!-- left content starts -->
-            <div class="left-content">
-              <ul class="action-list">
-                
-                <li class="item">
-                  <img class="feather feather-calendar" src="svg/calender.svg" alt="" />
-                  <span>
-                    <i class="fa-solid fa-clipboard-list-check"></i>
-                    All meetings
-                </span>
-                </li>
-                <li class="item">
-                  <img class="feather feather-hash" src="svg/hash.svg" alt="" />
-                  <span>Important</span>
-                </li>
-                <li class="item">
-                  <img class="feather feather-users" src="svg/users.svg" alt="" />
-                  <span> Add new meeting</span>
-                  <button class="btn" data-target="add_new_meeting">add new meeting</button>
-                 
-                </li>
-                <li class="item">
-                  <img class="feather feather-trash" src="svg/trash.svg" alt="" />
-                  <span>Trash</span>
-                </li>
-              </ul>
-            </div>
-            <!-- left content ends -->
-          </div>
-          <!--  -->
-          <!-- left bar ends -->
-
-          <!-- page content starts -->
+        
           <div class="page-content">
              
-            <label class="category header" for="opt-2">Today Meetings</label>
-            <script> showMeetings() </script>
-            <!-- tasks wrapper starts -->
-          <div class="meetings-wrapper" id="meetings">
-               
-           <!--    <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-1" checked />
-                <label for="item-1">
-                  <span class="label-text">Dashboard Design Implementation</span>
-                </label>
-                <span class="tag approved">Approved</span>
-              </div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-2" checked />
-                <label for="item-2">
-                  <span class="label-text">Create a userflow</span>
-                </label>
-                <span class="tag progress">In Progress</span>
-              </div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-3" />
-                <label for="item-3">
-                  <span class="label-text">Application Implementation</span>
-                </label>
-                <span class="tag review">In Review</span>
-              </div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-4" />
-                <label for="item-4">
-                  <span class="label-text">Create a Dashboard Design</span>
-                </label>
-                <span class="tag progress">In Progress</span>
-              </div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-5" />
-                <label for="item-5">
-                  <span class="label-text">Create a Web Application Design</span>
-                </label>
-                <span class="tag approved">Approved</span>
-              </div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-6" />
-                <label for="item-6">
-                  <span class="label-text">Interactive Design</span>
-                </label>
-                <span class="tag review">In Review</span>
-              </div>
-              <div class="header upcoming">Upcoming Tasks</div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-7" />
-                <label for="item-7">
-                  <span class="label-text">Dashboard Design Implementation</span>
-                </label>
-                <span class="tag waiting">Waiting</span>
-              </div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-8" />
-                <label for="item-8">
-                  <span class="label-text">Create a userflow</span>
-                </label>
-                <span class="tag waiting">Waiting</span>
-              </div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-9" />
-                <label for="item-9">
-                  <span class="label-text">Application Implementation</span>
-                </label>
-                <span class="tag waiting">Waiting</span>
-              </div>
-              <div class="task">
-                <input class="task-item" name="task" type="checkbox" id="item-10" />
-                <label for="item-10">
-                  <span class="label-text">Create a Dashboard Design</span>
-                </label>
-                <span class="tag waiting">Waiting</span>
-              </div>-->
-            </div> 
-            <!-- tasks wrapper ends -->
+            <label class="category header" for="opt-2">All Tasks</label>
+            <script> showTasks() </script>
+          <div class="tasks-wrapper" id="tasks"></div>
+
+          <div id="newtask">
+            <input type="text" id="title" placeholder="task name">
+            <input type="text" id="username" placeholder="your name">
+
+            <button data-target="app" id="addNewTask_btn" onclick="addNewTask()">Add New Task</button>
+        </div>  
           </div>
-          <!--  -->
-          <!-- page content ends -->
-        </div>
       </div>
-    </template>
-
-    <template id="add_new_meeting">
-      <div id="add_new_meeting_div">
-        <form>
-          <div class="content">
-            <div class="input-field">
-              <input id="title" type="userName" placeholder="User Name" required>
-            </div>
-            <div class="content">
-              <div class="input-field">
-                <input type="date" id="date" name="trip-start">
-            </div>
-            <div class="content">
-              <div class="input-field">
-                <select id="level">
-                  <option value="1">High priority</option>
-                  <option value="2">Middle priority</option>
-                  <option value="3">Low priority</option>
-              </select>
-            </div>
-            <div class="action">
-              <button class="btn" data-target="app" id="addNewMeeting_btn" onclick="addNewMeeting()">Add new meeting</button>
-            </div>
-        </form>
-
-      </div>
+      </div>      
+      
 
     </template>
  

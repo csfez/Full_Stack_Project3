@@ -1,31 +1,31 @@
 //localStorage.clear();
 // import {FXMLHttpRequest} from "Full_Stack_Project3\FXMLHttpRequest.js"
 // import FXMLHttpRequest from 'Full_Stack_Project3\FXMLHttpRequest.js'
-   var temp = document.querySelector('#sign_in');
-    var clon = temp.content.cloneNode(true);
-    document.querySelector('#main').appendChild(clon);
-    currentPage='sign_in';
+var temp = document.querySelector('#sign_in');
+var clon = temp.content.cloneNode(true);
+document.querySelector('#main').appendChild(clon);
+currentPage = 'sign_in';
 
-const app={
+const app = {
   // pages:[],
   // show:new Event('show'),
-  init:function(){
+  init: function () {
 
-    app.pages=document.getElementsByTagName("template");
+    app.pages = document.getElementsByTagName("template");
     console.log(app.pages);
 
-    document.querySelectorAll('.btn').forEach((button)=>{
+    document.querySelectorAll('.btn').forEach((button) => {
       button.addEventListener('click', app.nav);
     })
 
     history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
-  nav:function(ev){
+  nav: function (ev) {
 
     console.log(history.state);
     ev.preventDefault();
-    
+
     let currentPage = ev.target.getAttribute('data-target');
     var temp = document.querySelector(`#${currentPage}`);
     var clon = temp.content.cloneNode(true);
@@ -33,10 +33,10 @@ const app={
     var listItem = document.importNode(temp.content, true);
 
     // (`#${history.state}`).hide();
-    
+
     // const element = listItem.getElementById("div_temp");
     console.log(history.state);
-    var tempOld=document.querySelector(`#${history.state}`);
+    var tempOld = document.querySelector(`#${history.state}`);
     // var clonOld = tempOld.content.cloneNode(true);
     console.log(history.state);
     // var listItemTempOld = document.importNode(tempOld.content, true);
@@ -45,7 +45,7 @@ const app={
     document.querySelector('#main').removeChild(tempOld);
     document.querySelector('#main').appendChild(clon);
 
-    document.querySelectorAll('.btn').forEach((button)=>{
+    document.querySelectorAll('.btn').forEach((button) => {
       button.addEventListener('click', app.nav);
     })
     console.log(history.state)
@@ -53,7 +53,7 @@ const app={
     // document.getElementById(`${currentPage}_div`).dispatchEvent(app.init);
 
 
-     history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
+    history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
 
 }
@@ -106,41 +106,37 @@ function cleanInputs() {
   document.getElementById('psw').value = "";
 }
 
-function addUser(){
+function addUser() {
   //test username
   username = document.getElementById('uname').value;
   psw = document.getElementById('psw').value;
-  let tesRegex=  /^[A-Za-z]\w*$/;
-  if(!username.match(tesRegex)) 
-  { 
+  let tesRegex = /^[A-Za-z]\w*$/;
+  if (!username.match(tesRegex)) {
     alert("username must start with a letter and contain only characters, digits and underscore");
     return false;
   }
 
   //test password
-  if (!checkPassword(psw)){
+  if (!checkPassword(psw)) {
     return false;
   }
 
-  let user={
-      type:"user",
-      name:username,
-      password:psw, 
-      meetings:[]
-    };
+  let user = {
+    type: "user",
+    name: username,
+    password: psw,
+  };
 
-  var user_json=JSON.stringify(user);
-  var Fxml=new FXMLHttpRequest();
-  Fxml.open("POST","dataBase.js",user_json,true);
-  var res=Fxml.send(user_json);
-  if(res){
+  var user_json = JSON.stringify(user);
+  var Fxml = new FXMLHttpRequest();
+  Fxml.open("POST", "dataBase.js", user_json, true);
+  var res = Fxml.send(user_json);
+  if (res) {
     alert("your account has been created")
   }
   cleanInputs();
 
 }
-
-
 
 function checkPassword(psw) {
   const isWhitespace = /^(?=.*\s)/;
@@ -171,63 +167,71 @@ function checkPassword(psw) {
 }
 
 
-function signIn(){
+function signIn() {
   username = document.getElementById('uname').value;
   psw = document.getElementById('psw').value;
-  
-  let user={
-    type:"userSignIn",
-    name:username,
-    password:psw,
-  };
 
-  var user_json=JSON.stringify(user);  
-  var Fxml=new FXMLHttpRequest();
-  Fxml.open("POST","dataBase.js",user_json,true);
-  var res=Fxml.send(user_json);
-  if(res){
-    var button=document.getElementById('sign_in_btn');
-    button.dataset.target="app"
+  let user = {
+    type: "userSignIn",
+    name: username,
+    password: psw,
+  };
+  var user_json = JSON.stringify(user);
+  var Fxml = new FXMLHttpRequest();
+
+  Fxml.open("GET","dataBase.js", user_json, true);
+  var res = Fxml.send();
+  if (res) {
+    var button = document.getElementById('sign_in_btn');
+    button.dataset.target = "app"
     app.init();
-  }else{
+    showTasks()
+  } else {
     cleanInputs();
+    alert("wrong userName or password")
   }
+
+ /*  var user_json = JSON.stringify(user);
+  var Fxml = new FXMLHttpRequest();
+  Fxml.open("POST", "dataBase.js", user_json, true);
+  var res = Fxml.send(user_json);
+  if (res) {
+    var button = document.getElementById('sign_in_btn');
+    button.dataset.target = "app"
+    app.init();
+    showTasks()
+  } else {
+    cleanInputs();
+  } */
 }
 
-// function newMeeting(){
-//   app.init();
-// }
+function addNewTask() {
 
-function addNewMeeting(){
-
+  username = document.getElementById('username').value;
   title = document.getElementById('title').value;
-  date = document.getElementById('date').value;
-  level=document.getElementById('level').value;
-  // const importance_level = [].filter
-  //               .call(level.options, option => option.selected)
-  //               .map(option => option.text);
-  let meeting={
-    type:"add_meeting",
-    title:title,
-    date:date,
-    importance_level:level
+  let task = {
+    type: "add_task",
+    name: username,
+    title: title,
   };
 
-  var meeting_json=JSON.stringify(meeting);  
-  var Fxml=new FXMLHttpRequest();
-  Fxml.open("POST","dataBase.js",meeting_json,true);
-  var res=Fxml.send(meeting_json);
-  if(res){
-    alert('meeting saves')
+  var task_json = JSON.stringify(task);
+  var Fxml = new FXMLHttpRequest();
+  Fxml.open("POST", "dataBase.js", task_json, true);
+  var res = Fxml.send(task_json);
+  if (res) {
+    alert('task saves')
   }
+  showTasks();
 }
 
 
-function showMeetings(){
-  var Fxml=new FXMLHttpRequest();
-  Fxml.open("GET","dataBase.js",null,true);
-  var res=Fxml.send();
-  if(res){
-  
+function showTasks() {
+  var Fxml = new FXMLHttpRequest();
+  Fxml.open("GET", "dataBase.js", null, true);
+  var res = Fxml.send();
+  if (res) {
+    document.getElementById("tasks").innerHTML = res;
   }
 }
+
