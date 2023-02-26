@@ -186,6 +186,7 @@ function signIn() {
     button.dataset.target = "app"
     app.init();
     showTasks()
+    
   } else {
     cleanInputs();
     alert("wrong userName or password")
@@ -207,7 +208,9 @@ function signIn() {
 
 function addNewTask() {
 
-  username = document.getElementById('username').value;
+  
+
+  // username = document.getElementById('username').value;
   title = document.getElementById('title').value;
   let task = {
     type: "add_task",
@@ -220,18 +223,83 @@ function addNewTask() {
   Fxml.open("POST", "dataBase.js", task_json, true);
   var res = Fxml.send(task_json);
   if (res) {
-    alert('task saves')
+    alert('task saves');
+    showNewTasks(task);
   }
-  showTasks();
+  
 }
 
 
 function showTasks() {
+
   var Fxml = new FXMLHttpRequest();
   Fxml.open("GET", "dataBase.js", null, true);
   var res = Fxml.send();
   if (res) {
-    document.getElementById("tasks").innerHTML = res;
+    for(const tas of res){
+      var li = document.createElement("li");
+      var inputValue = tas.title;
+      var t = document.createTextNode(inputValue);
+      li.appendChild(t);
+      if (inputValue === '') {
+        alert("You must write something!");
+      } else {
+        document.getElementById("myUL").appendChild(li);
+      }
+      document.getElementById("title").value = "";
+
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      li.appendChild(span);
+     
+
+      // var li = document.createElement("li");
+      // // var inputValue = document.getElementById("title").value;
+      // var inputValue = res;
+      // var t = document.createTextNode(tas.title);
+      // li.appendChild(t);
+      // if (inputValue === '') {
+      //   alert("You must write something!");
+      // } else {
+      //   document.getElementById("tasks").appendChild(li);
+      // }
+    } 
+      // document.getElementById("tasks").innerHTML = res;
   }
+   // Add a "checked" symbol when clicking on a list item
+   var list = document.querySelector('ul');
+   list.addEventListener('click', function(ev) {
+     if (ev.target.tagName === 'LI') {
+       ev.target.classList.toggle('checked');
+     }
+   }, false);
+}
+
+function showNewTasks(NewTask){
+  var li = document.createElement("li");
+  var inputValue = NewTask.title;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("title").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+ 
+}
+
+function delete_task(){
+  
+ 
 }
 

@@ -80,19 +80,27 @@
 
      <template id="app">
       <div id="app_div">
-        
+
+        <div id="newtask">
+          <input type="text" id="title" placeholder="task name">
+
+          <button data-target="app" id="addNewTask_btn" onclick="addNewTask()">Add New Task</button>
+        </div>  
           <div class="page-content">
-             
+            
             <label class="category header" for="opt-2">All Tasks</label>
             <script> showTasks() </script>
           <div class="tasks-wrapper" id="tasks"></div>
-
+          <ul id="myUL">
+            
+          </ul>
+<!-- 
           <div id="newtask">
             <input type="text" id="title" placeholder="task name">
             <input type="text" id="username" placeholder="your name">
 
             <button data-target="app" id="addNewTask_btn" onclick="addNewTask()">Add New Task</button>
-        </div>  
+        </div>   -->
           </div>
       </div>
       </div>      

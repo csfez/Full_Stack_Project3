@@ -3,14 +3,14 @@ class dataBase{
   constructor(){
       this.userArray=localStorage.getItem('users');
       this.taskArray=localStorage.getItem('tasks');
-      this.meetingId=localStorage.getItem('meetingId');
+      // this.taskId=localStorage.getItem('taskId');
 
       if(this.userArray===null){
         this.userArray = new Array();
         this.taskArray=new Array();
         localStorage.setItem('users',JSON.stringify(this.userArray));
         localStorage.setItem('tasks',JSON.stringify(this.taskArray));
-        localStorage.setItem('taskId',0);
+        // localStorage.setItem('taskId',0);
       }
       else{
         this.userArray=JSON.parse(this.userArray);
@@ -138,44 +138,27 @@ class dataBase{
       var title = task_obj.title;
       var username = task_obj.username;
 
-      //let currentUser=sessionStorage.getItem('currentUser');
+      let currentUser=sessionStorage.getItem('currentUser');
 
-<<<<<<< HEAD
-     /*  const currentUser=sessionStorage.getItem("currentUser");
-      let userArray=localStorage.getItem('users');
-      userArray=JSON.parse(userArray);
-  
-      for (const user of userArray){
-          if(user.name===currentUser){  
-            //Update object's name property.
-              JSON.parse(user.tasks) = JSON.parse(user.meetings).push(this.meetingId);
-             
-              localStorage.setItem('users',JSON.stringify(userArray));
-          }
-          } */
-                 
-     // objIndex = this.userArray.findIndex((obj => obj.name == currentUser));
-=======
-      objIndex = JSON.parse(this.userArray).findIndex((obj => obj.name == currentUser));
->>>>>>> a991c6ccefb3125df88fa749c393d3c6d0d5eeb0
+      // objIndex = JSON.parse(this.userArray).findIndex((obj => obj.name == currentUser));
 
       //Log object to Console.
       //console.log("Before update: ", myArray[objIndex])
 
     
 
-      for (const user of this.userArray){
-        if(JSON.parse(user).name===currentUser){
-          //put the id of the meeting in the user object
-          var u=JSON.parse(user);
-          u.meetings.push(this.meetingId);
-        }
-       } 
+      // for (const user of this.userArray){
+      //   if(JSON.parse(user).name===currentUser){
+      //     //put the id of the meeting in the user object
+      //     var u=JSON.parse(user);
+      //     u.tasks.push(this.taskId);
+      //   }
+      //  } 
           //create the meeting in the meeting array
           var task={
             //meetingId:this.meetingId,
             title:title,
-            username:username
+            username:currentUser
             //date:date,
             //importance_level:importance_level
           };
@@ -208,10 +191,10 @@ class dataBase{
     //var list_tasksId_current_user=[];
     var list_tasks=[]
     let currentUser=sessionStorage.getItem('currentUser');
-    if(this.taskArray!=null){
+    if(this.taskArray.length!=0){
       for(const task of this.taskArray){
-          if(JSON.parse(task).username==currentUser){
-            list_tasks.push(task);
+          if(task.username==currentUser){
+              list_tasks.push(task);
             }
           }
         }
@@ -233,17 +216,18 @@ class dataBase{
   }
 
   getUser(user_){
+
     var user_obj=JSON.parse(user_);
     username = user_obj.name;
     psw = user_obj.password;
 
     for (const user of this.userArray){
       if(JSON.parse(user).name===username){
-        if(JSON.parse(user).password===psw){
-          sessionStorage.setItem("currentUser",username);
-          return user;
+          if(JSON.parse(user).password===psw){
+            sessionStorage.setItem("currentUser",username);
+            return user;
 
-        }
+          }
         }
       }
   }
