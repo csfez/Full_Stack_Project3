@@ -140,6 +140,7 @@ class dataBase{
 
       //let currentUser=sessionStorage.getItem('currentUser');
 
+<<<<<<< HEAD
      /*  const currentUser=sessionStorage.getItem("currentUser");
       let userArray=localStorage.getItem('users');
       userArray=JSON.parse(userArray);
@@ -154,18 +155,22 @@ class dataBase{
           } */
                  
      // objIndex = this.userArray.findIndex((obj => obj.name == currentUser));
+=======
+      objIndex = JSON.parse(this.userArray).findIndex((obj => obj.name == currentUser));
+>>>>>>> a991c6ccefb3125df88fa749c393d3c6d0d5eeb0
 
       //Log object to Console.
       //console.log("Before update: ", myArray[objIndex])
 
     
 
-      // for (const user of this.userArray){
-      //   if(JSON.parse(user).name===currentUser){
-      //     //put the id of the meeting in the user object
-      //     var u=JSON.parse(user);
-      //     u.meetings.push(this.meetingId);
-        // } } 
+      for (const user of this.userArray){
+        if(JSON.parse(user).name===currentUser){
+          //put the id of the meeting in the user object
+          var u=JSON.parse(user);
+          u.meetings.push(this.meetingId);
+        }
+       } 
           //create the meeting in the meeting array
           var task={
             //meetingId:this.meetingId,
