@@ -143,7 +143,7 @@ class dataBase{
 
       let currentUser=sessionStorage.getItem('currentUser');
 
-      objIndex = JSON.parse(this.userArray).findIndex((obj => obj.name == currentUser));
+      objIndex = this.userArray.findIndex((obj => obj.name == currentUser));
 
       //Log object to Console.
       console.log("Before update: ", myArray[objIndex])
