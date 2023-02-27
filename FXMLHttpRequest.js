@@ -2,8 +2,6 @@
 
 
 class FXMLHttpRequest{
-   
-
   open(method, url, body, async) {
     this.method=method;
     this.url=url;

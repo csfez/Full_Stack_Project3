@@ -1,14 +1,10 @@
 //localStorage.clear();
-// import {FXMLHttpRequest} from "Full_Stack_Project3\FXMLHttpRequest.js"
-// import FXMLHttpRequest from 'Full_Stack_Project3\FXMLHttpRequest.js'
 var temp = document.querySelector('#sign_in');
 var clon = temp.content.cloneNode(true);
 document.querySelector('#main').appendChild(clon);
 currentPage = 'sign_in';
 
 const app = {
-  // pages:[],
-  // show:new Event('show'),
   init: function () {
 
     app.pages = document.getElementsByTagName("template");
@@ -57,49 +53,7 @@ const app = {
   },
 
 }
-
-
 document.addEventListener('DOMContentLoaded', app.init);
-
-
-// let username;
-// let psw;
-// let userArray;
-
-// let registerButton = document.getElementsByTagName('button')[0];
-// let signInButton = document.getElementsByTagName('button')[1];
-// registerButton.addEventListener('click', register);
-// signInButton.addEventListener('click', signIn);
-
-// initialize();
-
-// function initialize(){
-//   userArray=localStorage.getItem('all_users');
-//   if(userArray===null){
-//     userArray = new Array();
-//     localStorage.setItem('all_users',JSON.stringify(userArray));
-//   }
-//   else{
-//     userArray=JSON.parse(userArray);
-//   }
-// }
-
-// function register(){
-//   username = document.getElementById('uname').value;
-//   psw = document.getElementById('psw').value;
-
-//   for (const user of userArray){
-//     if(user.name===username){
-//       alert("uesr name already exist!")
-//       return;
-//     }
-//   }
-//   if(addData()){
-//     cleanInputs();
-//     window.location.replace('./main.html');
-//     sessionStorage.setItem("cuurentUser",username);
-//   }
-// }
 
 function cleanInputs() {
   document.getElementById('uname').value = "";
@@ -280,14 +234,6 @@ function showTasks() {
       span.id=tas.title;
        
       span.appendChild(txt);
-      // const btn=document.createElement('button');
-      // btn.textContent = 'update';
-      // btn.id=tas.title;
-      // btn.addEventListener('click', function() {
-      //   updateTask(this.id);
-      // });
-
-      // li.appendChild(btn)
       li.appendChild(span);
 
       span.onclick = function() {
@@ -367,38 +313,24 @@ function delete_task(task_deleted){
 //   Fxml.open("DELETE", "dataBase.js", task_deleted, true);
 //   var res = Fxml.send(task_deleted);
 // }
-
+myInfos();
 function myInfos(){
   // app.init();
   var Fxml = new FXMLHttpRequest();
-  Fxml.open("GET", "dataBase.js","getInfoUser", true);
+  Fxml.open("GET", "getInfoUser","getInfoUser", true);
   var res = Fxml.send();
-/*   const h1Element = document.createElement('h1');
-  h1Element.className="my_h1"
-  h1Element.textContent=`Welcome ${res.name}`;
-  document.getElementById("my_info_div").appendChild(h1Element);
-  const name = document.createElement('h2');
-  name.textContent=`name: ${res.username}`;
-  document.getElementById("my_info_div").appendChild(name);
-  const email = document.createElement('h2');
-  email.textContent=`email: ${res.email}`;
-  document.getElementById("my_info_div").appendChild(email);
-  const phone = document.createElement('h2');
-  phone.textContent=`name: ${res.phone}`;
-  document.getElementById("my_info_div").appendChild(phone); */
-
   document.getElementById("user_name").innerText=res.name;
   document.getElementById("user_email").innerText=res.email;
   document.getElementById("user_phone").innerText=res.phone;
-
   return res;
-
 }
 
 function editInfos(){
-  
-  var user_obj=myInfos();
-  // document.getElementsByName("uname")[0].placeholder=user_obj.name;
+  var Fxml = new FXMLHttpRequest();
+  Fxml.open("GET", "getInfoUser","getInfoUser", true);
+  var res = Fxml.send();
+ // var user_obj=myInfos();
+  document.getElementsById("uname1").placeholder=res.name;
   // document.getElementById("email").placeholder=user_obj.email;
   // document.getElementById("phone").placeholder=user_obj.phone;
   // document.getElementById("psw").placeholder=user_obj.password;  

@@ -58,7 +58,7 @@
                 <button  class="btn" data-target="sign_up">Register</button>
               </div>
               <h1>Register</h1>
-              <form >
+              <form>
                 <div class="content">
                   <div class="input-field">
                     <input id="uname" type="userName" placeholder="User Name" required>
@@ -119,9 +119,10 @@
             <br>
             <p id="user_phone"></p>
             <br>
-            <p><button class="btn" data-target="edit_info" onclick="editInfos()">Edit</button></p>
-        </div>
-      
+            <div class="action">
+            <button class="btn" data-target="edit_info" onclick="editInfos()">Edit</button>
+            </div>
+          </div>      
       </div>
 <!-- 
           <div id="newtask">
@@ -137,10 +138,10 @@
 
     <template id="edit_info">
       <div id="edit_info_div">
-        <form >
+        <form>
           <div class="content">
             <div class="input-field">
-              <input id="uname" type="userName" placeholder="Password" required>
+              <input id="uname1" type="userName" placeholder="Password" required>
             </div>
             <div class="input-field">
               <input name="psw" type="password" placeholder="Password" required>
@@ -151,9 +152,7 @@
             <div class="input-field">
               <input name="phone" type="number" placeholder="phone number" required>
             </div>
-            <!-- <label>Must contain a lowercase letter.</label><br>
-            <label>Must contain an uppercase letter.</label><br>
-            <label>Must contain a number or special character.</label><br> -->
+            
           </div>
           <div class="action">
             <button class="btn" data-target="sign_in" id="register_btn" onclick="editUser()">Register</button>

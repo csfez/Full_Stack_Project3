@@ -52,66 +52,6 @@ class dataBase{
 
     }
 
-    // cleanInputs() {
-    //   document.getElementById('uname').value = "";
-    //   document.getElementById('psw').value = "";
-    // }
-
-    
-    // function addData(){
-    //   //test username
-    //   let tesRegex=  /^[A-Za-z]\w*$/;
-    //   if(!username.match(tesRegex)) 
-    //   { 
-    //     alert("username must tart with a letter and contain only characters, digits and underscore");
-    //     return false;
-    //   }
-
-    //   //test password
-    //   if (!checkPassword(psw)){
-    //     return false;
-    //   }
-
-    //   let user={
-    //     name:username,
-    //      password:psw, 
-        
-    //     };
-      
-    //   userArray.push(user);
-    //   localStorage.setItem('users',JSON.stringify(userArray));
-    //   return true;
-    // }
-
-    // checkPassword(psw) {
-    //   const isWhitespace = /^(?=.*\s)/;
-    //   if (isWhitespace.test(psw)) {
-    //     alert("Password must not contain Whitespaces");
-    //     return false;
-    //   }
-
-    //   const isContainsLetter = /^(?=.*[A-Za-z])/;
-    //   if (!isContainsLetter.test(psw)) {
-    //     alert("Password must contain at least one Letter");
-    //     return false;
-    //   }
-
-    //   const isContainsNumber = /^(?=.*[0-9])/;
-    //   if (!isContainsNumber.test(psw)) {
-    //     alert("Password must contain at least one Digit");
-    //     return false;
-    //   }
-
-    //   const isValidLength = /^.{3,15}$/;
-    //   if (!isValidLength.test(psw)) {
-    //     alert("Password must be 3-15 Characters Long");
-    //     return false;
-    //   }
-
-    //   return true;
-    // }
-
-
     signIn(userSignIn){
     
       var user_obj=JSON.parse(userSignIn);
@@ -185,6 +125,8 @@ class dataBase{
           i--; 
         }
       }
+      localStorage.setItem('tasks',JSON.stringify(this.taskArray));
+
     }
 
   getAllTasks(){
@@ -255,7 +197,14 @@ class dataBase{
       }
   }
 
-  updateUser(user){
+  updateUser(user_){
+    let currentUser=sessionStorage.getItem('currentUser');
+    for (var i = 0; i < this.userArray.length; i++){
+      if(JSON.parse(userArray[i]).name===currentUser){
+        userArray[i]=user_;
+      }
+    }  
+    localStorage.setItem('users',JSON.stringify(this.userArray));
     //delete first
     register()
     return true;
