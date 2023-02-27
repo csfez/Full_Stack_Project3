@@ -35,8 +35,8 @@ class dataBase{
     register(user){
       var user_obj=JSON.parse(user);
       username = user_obj.name;
-      psw = user_obj.password;
-
+      // psw = user_obj.password;
+      
     
       for (const user of this.userArray){
         if(JSON.parse(user).name===username){
@@ -232,6 +232,19 @@ class dataBase{
       }
   }
 
+  getInfoUser(){
+    let currentUser=sessionStorage.getItem('currentUser');
+   
+      for(const user of this.userArray){
+        if(JSON.parse(user).name==currentUser){
+          var user_obj=JSON.parse(user);
+          return user_obj;
+        }
+      }
+
+        
+  }
+
   getTask(task_){
     var task_obj=JSON.parse(task_);
     username = task_obj.username;
@@ -244,9 +257,16 @@ class dataBase{
         }
       }
   }
+
   updateUser(user){
 
   }
   
+  deleteTask(task_title_deleted){
+
+    this.taskArray= this.taskArray.filter(t => t.title!=task_title_deleted); 
+    localStorage.setItem('tasks',JSON.stringify(this.taskArray));
+  }
  
 }
+
