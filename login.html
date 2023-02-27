@@ -66,12 +66,18 @@
                   <div class="input-field">
                     <input id="psw" type="password" placeholder="Password" required>
                   </div>
+                  <div class="input-field">
+                    <input id="email" type="email" placeholder="email" required>
+                  </div>
+                  <div class="input-field">
+                    <input id="phone" type="number" placeholder="phone number" required>
+                  </div>
                   <label>Must contain a lowercase letter.</label><br>
                   <label>Must contain an uppercase letter.</label><br>
                   <label>Must contain a number or special character.</label><br>
                 </div>
                 <div class="action">
-                  <button id="register_btn" onclick="addUser()">Register</button>
+                  <button class="btn" data-target="sign_in" id="register_btn" onclick="addUser()">Register</button>
                 </div>
               </form>
               </div> 
@@ -81,19 +87,23 @@
      <template id="app">
       <div id="app_div">
 
-        <div id="newtask">
-          <input type="text" id="title" placeholder="task name">
-
-          <button data-target="app" id="addNewTask_btn" onclick="addNewTask()">Add New Task</button>
-        </div>  
+         
           <div class="page-content">
-            
+            <button class="btn" data-target="my_info" id="my_button" onclick="myInfos()">my info</button>
+            <div id="newtask">
+              <input type="text" id="title" placeholder="task name">
+    
+              <button data-target="app" id="addNewTask_btn" onclick="addNewTask()">Add New Task</button>
+
+            </div> 
             <label class="category header" for="opt-2">All Tasks</label>
             <script> showTasks() </script>
-          <div class="tasks-wrapper" id="tasks"></div>
-          <ul id="myUL">
+            <div class="tasks-wrapper" id="tasks">
+              <ul id="myUL">
+              
+              </ul>
+            </div>
             
-          </ul>
 <!-- 
           <div id="newtask">
             <input type="text" id="title" placeholder="task name">
@@ -105,6 +115,14 @@
       </div>
       </div>      
       
+
+    </template>
+
+    <template id="my_info">
+      <div id="my_info_div">
+        
+        <button class="btn" data-target="app">return</button>
+      </div>
 
     </template>
  
