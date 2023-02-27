@@ -192,8 +192,9 @@ function signIn() {
     button.dataset.target = "app"
     app.init();
     showTasks();
-    myInfos();
     checked();
+    myInfos();
+  
     const h1Element = document.createElement('h1');
     h1Element.className="my_h1"
     h1Element.textContent = `Welcome ${username}`;
@@ -222,28 +223,33 @@ function signIn() {
 function addNewTask() {
   // username = document.getElementById('username').value;
   title = document.getElementById('title').value;
-  let task = {
-    type: "add_task",
-    name: username,
-    title: title,
-  };
+  if(title==null){
+    alert("You must write something!");
+    }
+  else{
+      let task = {
+        type: "add_task",
+        name: username,
+        title: title,
+      };
 
-  var task_json = JSON.stringify(task);
-  var Fxml = new FXMLHttpRequest();
-  Fxml.open("POST", "dataBase.js", task_json, true);
-  var res = Fxml.send(task_json);
-  if (res) {
-    alert('task saves');
-    document.getElementById("myUL").innerHTML = "";
-    showTasks();
-    // // Add a "checked" symbol when clicking on a list item
-    // var list = document.querySelector('ul');
-    // list.addEventListener('click', function(ev) {
-    //   if (ev.target.tagName === 'LI') {
-    //     ev.target.classList.toggle('checked');
-    //   }
-    // }, false);
-    checked();
+      var task_json = JSON.stringify(task);
+      var Fxml = new FXMLHttpRequest();
+      Fxml.open("POST", "dataBase.js", task_json, true);
+      var res = Fxml.send(task_json);
+      if (res) {
+        alert('task saves');
+        document.getElementById("myUL").innerHTML = "";
+        showTasks();
+        // // Add a "checked" symbol when clicking on a list item
+        // var list = document.querySelector('ul');
+        // list.addEventListener('click', function(ev) {
+        //   if (ev.target.tagName === 'LI') {
+        //     ev.target.classList.toggle('checked');
+        //   }
+        // }, false);
+        checked();
+      }
   }
   
 }
@@ -260,10 +266,10 @@ function showTasks() {
       var inputValue = tas.title;
       var t = document.createTextNode(inputValue);
       li.appendChild(t);
-       if (inputValue === '') {
-        alert("You must write something!");
-      } else { 
-        document.getElementById("myUL").appendChild(li);
+      //  if (inputValue === '') {
+      //   alert("You must write something!");
+      // } else { 
+      document.getElementById("myUL").appendChild(li);
       //}
       document.getElementById("title").value = "";
 
@@ -289,9 +295,9 @@ function showTasks() {
         delete_task(this.id);
       };
 
-      
-     
-    } 
+    }
+     checked();
+  } 
    
     // var closebtns = document.getElementsByClassName("close");
     //   var i;
@@ -307,7 +313,7 @@ function showTasks() {
     
 
     // document.getElementById("tasks").innerHTML = res;
-  }
+  //}
   
 }
 
@@ -385,6 +391,33 @@ function myInfos(){
   document.getElementById("user_email").innerText=res.email;
   document.getElementById("user_phone").innerText=res.phone;
 
+  return res;
 
 }
 
+function editInfos(){
+  
+  var user_obj=myInfos();
+  // document.getElementsByName("uname")[0].placeholder=user_obj.name;
+  // document.getElementById("email").placeholder=user_obj.email;
+  // document.getElementById("phone").placeholder=user_obj.phone;
+  // document.getElementById("psw").placeholder=user_obj.password;  
+  
+}
+
+function editUser(){
+  username = document.getElementById('uname').value;
+  psw = document.getElementById('psw').value;
+  email=document.getElementById('email').value;
+  phone=document.getElementById('phone').value;
+  let user = {
+    name: username,
+    password: psw,
+    email:email,
+    phone:phone
+  };
+
+  var Fxml = new FXMLHttpRequest();
+  Fxml.open("GET", "editUser",user, true);
+  var res = Fxml.send();
+}

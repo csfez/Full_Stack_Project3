@@ -256,7 +256,9 @@ class dataBase{
   }
 
   updateUser(user){
-
+    //delete first
+    register()
+    return true;
   }
   
   deleteTask(task_title_deleted){

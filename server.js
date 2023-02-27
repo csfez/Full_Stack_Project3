@@ -28,6 +28,9 @@ class server{
 
 
         if(req.method=='POST'){
+            if(req.url=='editUser'){
+                res=db.updateUser(req.body);
+            }else{
             if(JSON.parse(req.body).type=="user"){
                 res=db.register(req.body); //if its true as he managed to add
             }
@@ -37,7 +40,7 @@ class server{
             if(JSON.parse(req.body).type=="userSignIn"){
                 res=db.signIn(req.body);
             }
-             
+        }
         }
         if(req.method=='DELETE'){
             res=db.deleteTask(req.body);
