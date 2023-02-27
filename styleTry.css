@@ -1,0 +1,100 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+body {
+    background:rgba(176, 196, 222, 0.878);
+    font-family: 'Rubik', sans-serif;  
+    padding: 30px;
+    justify-content: center;
+    font-family: 'Indie Flower', 'Comic Sans', cursive;
+
+    
+  }
+.card {
+    background-color: whitesmoke;
+    max-width: 300px;
+    top:0%;
+    float:right;
+    width: 25%;
+    border-radius: 8%;
+
+  }
+
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
+  
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Indie Flower', 'Comic Sans', cursive;
+
+  }
+  .left{
+    background-color: whitesmoke;
+    float:left;
+    left: -20px;
+    width: 70%;
+    height: 400px;
+    border-radius: 8%;
+    padding:20px;
+   }
+
+   .page-content .header {
+    font-size: 26px;
+    
+    border-bottom:2px solid #5d606b;
+  }
+  .category {
+    font-weight: 500;
+    color: var(--secondary-color);
+    border-bottom: 1px solid #ddd;
+    transition: 0.4s ease-in;
+    top:10%;
+    padding: 10px 40px;
+    cursor: pointer;
+  }
+
+  #newtask{
+    border-top: 2px solid var(--box-color-2);
+  
+        text-align: center;
+      position: relative;
+      padding: 20px 10px;
+  }
+  #newtask input{
+      width: 50%;
+      height: 35px;
+      margin: 10px;
+      color: #111111;
+      font-weight: 500;
+      position: relative;
+      border-radius: 5px;
+      font-size: 15px;
+      border: 2px solid #d1d3d4;
+      font-family: 'Indie Flower', 'Comic Sans', cursive;
+
+  }
+  #newtask button{
+    position: relative;
+    font-weight: 500;
+    font-size: 16px;
+    background-color:orange;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    width: 20%;
+    height: 45px;
+    border-radius: 5px;
+    font-family: 'Indie Flower', 'Comic Sans', cursive;
+
+}

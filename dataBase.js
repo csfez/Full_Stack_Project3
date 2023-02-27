@@ -234,15 +234,12 @@ class dataBase{
 
   getInfoUser(){
     let currentUser=sessionStorage.getItem('currentUser');
-   
       for(const user of this.userArray){
-        if(JSON.parse(user).name==currentUser){
+        if(JSON.parse(user).name===currentUser){
           var user_obj=JSON.parse(user);
           return user_obj;
         }
-      }
-
-        
+      }    
   }
 
   getTask(task_){

@@ -1,4 +1,4 @@
-localStorage.clear();
+//localStorage.clear();
 // import {FXMLHttpRequest} from "Full_Stack_Project3\FXMLHttpRequest.js"
 // import FXMLHttpRequest from 'Full_Stack_Project3\FXMLHttpRequest.js'
 var temp = document.querySelector('#sign_in');
@@ -192,6 +192,7 @@ function signIn() {
     button.dataset.target = "app"
     app.init();
     showTasks();
+    myInfos();
     checked();
     const h1Element = document.createElement('h1');
     h1Element.className="my_h1"
@@ -259,11 +260,11 @@ function showTasks() {
       var inputValue = tas.title;
       var t = document.createTextNode(inputValue);
       li.appendChild(t);
-      if (inputValue === '') {
+       if (inputValue === '') {
         alert("You must write something!");
-      } else {
+      } else { 
         document.getElementById("myUL").appendChild(li);
-      }
+      //}
       document.getElementById("title").value = "";
 
       var span = document.createElement("SPAN");
@@ -366,7 +367,7 @@ function myInfos(){
   var Fxml = new FXMLHttpRequest();
   Fxml.open("GET", "dataBase.js","getInfoUser", true);
   var res = Fxml.send();
-  const h1Element = document.createElement('h1');
+/*   const h1Element = document.createElement('h1');
   h1Element.className="my_h1"
   h1Element.textContent=`Welcome ${res.name}`;
   document.getElementById("my_info_div").appendChild(h1Element);
@@ -378,7 +379,12 @@ function myInfos(){
   document.getElementById("my_info_div").appendChild(email);
   const phone = document.createElement('h2');
   phone.textContent=`name: ${res.phone}`;
-  document.getElementById("my_info_div").appendChild(phone);
+  document.getElementById("my_info_div").appendChild(phone); */
+
+  document.getElementById("user_name").innerText=res.name;
+  document.getElementById("user_email").innerText=res.email;
+  document.getElementById("user_phone").innerText=res.phone;
+
 
 }
 
