@@ -5,16 +5,23 @@ document.querySelector('#main').appendChild(clon);
 currentPage = 'sign_in';
 
 const app = {
+  pages: [],
+  show: new Event('show'),
   init: function () {
-
-    app.pages = document.getElementsByTagName("template");
-    console.log(app.pages);
+    app.pages = document.querySelectorAll('.page');
+    app.pages.forEach((pg)=>{
+        pg.addEventListener('show', app.pageShown);
+    })
+    
+    // app.pages = document.getElementsByTagName("template");
+    // console.log(app.pages);
 
     document.querySelectorAll('.btn').forEach((button) => {
       button.addEventListener('click', app.nav);
     })
 
     history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
+    window.addEventListener('popstate', app.poppin);
   },
 
   nav: function (ev) {
@@ -22,17 +29,17 @@ const app = {
     console.log(history.state);
     ev.preventDefault();
 
-    let currentPage = ev.target.getAttribute('data-target');
+    currentPage = ev.target.getAttribute('data-target');
     var temp = document.querySelector(`#${currentPage}`);
     var clon = temp.content.cloneNode(true);
 
-    var listItem = document.importNode(temp.content, true);
+    // var listItem = document.importNode(temp.content, true);
 
     // (`#${history.state}`).hide();
 
     // const element = listItem.getElementById("div_temp");
     console.log(history.state);
-    var tempOld = document.querySelector(`#${history.state}`);
+    var tempOld = document.querySelector(`${location.hash}_div`);
     // var clonOld = tempOld.content.cloneNode(true);
     console.log(history.state);
     // var listItemTempOld = document.importNode(tempOld.content, true);
@@ -48,9 +55,51 @@ const app = {
     // window.addEventListener('init', app.init);
     // document.getElementById(`${currentPage}_div`).dispatchEvent(app.init);
 
+    
+    history.pushState({}, "currentPage", `#${currentPage}`);
+    // history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
+    document.getElementById(currentPage).dispatchEvent(app.show);
+    // window.addEventListener('popstate', app.poppin);
 
-    history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
   },
+  pageShown: function(ev){
+    console.log('Page', ev.target.id, 'just shown');
+    console.log(currentPage);
+    if(ev.target.id=="edit_info"){
+      var Fxml = new FXMLHttpRequest();
+      Fxml.open("GET", "getInfoUser","getInfoUser", true);
+      var user = Fxml.send();
+      document.getElementById("uname").setAttribute("value",user.name);
+      document.getElementById("email").setAttribute("value",user.email);
+      document.getElementById("phone").setAttribute("value",user.phone);
+      document.getElementById("psw").setAttribute("value",user.password);  
+    }
+    // let h1 = ev.target.querySelector('h1');
+    // h1.classList.add('big')
+    // setTimeout((h)=>{
+    //     h.classList.remove('big');
+    // }, 1200, h1);
+  },
+  poppin: function(ev){
+    // console.log(ev.target.getAttribute(`${currentPage}_div`));
+    var tempOld = document.querySelector(`#${currentPage}_div`);
+    console.log(location.hash, 'popstate event');
+    var tempNew = document.querySelector(location.hash);
+    var clon = tempNew.content.cloneNode(true);
+    document.querySelector('#main').removeChild(tempOld);
+    document.querySelector('#main').appendChild(clon);
+
+    document.querySelectorAll('.btn').forEach((button) => {
+      button.addEventListener('click', app.nav);
+    })
+    let hash = location.hash.replace('#' ,'');
+    currentPage=hash;
+    // document.querySelector('.active').classList.remove('active');
+    // document.getElementById(hash).classList.add('active');
+    console.log(hash)
+    //history.pushState({}, currentPage, `#${currentPage}`);
+    document.getElementById(hash).dispatchEvent(app.show);
+  }
 
 }
 document.addEventListener('DOMContentLoaded', app.init);
@@ -326,46 +375,49 @@ function myInfos(){
   return res;
 }
 
-function editInfos(){
-  // var Fxml = new FXMLHttpRequest();
-  // Fxml.open("GET", "getInfoUser","getInfoUser", true);
-  // var res = Fxml.send();
-  var user_obj=myInfos();
-  // window.onload = function() {
-  app.nav();
-  var temp = document.getElementById('edit_info');
-  var clon = temp.content.cloneNode(true);
+// function editInfos(){
+//   // var Fxml = new FXMLHttpRequest();
+//   // Fxml.open("GET", "getInfoUser","getInfoUser", true);
+//   // var res = Fxml.send();
+//   var user_obj=myInfos();
+//   // window.onload = function() {
+//   // app.nav();
+//   // var temp = document.getElementById('edit_info');
+//   // var clon = temp.content.cloneNode(true);
 
-  // Récupération de l'élément input
-  const input = clon.querySelector('#uname1');
+//   var name=document.getElementById("uname");
+//   name.setAttribute("value","john");
+//   // // Récupération de l'élément input
+//   // const input = clon.querySelector('#uname1');
   
-  // Modification de la valeur de l'input
-  input.value = 'nouvelle valeur';
-  var listItem = document.importNode(temp.content, true);
+//   // // Modification de la valeur de l'input
+//   // input.value = 'nouvelle valeur';
+//   // var listItem = document.importNode(temp.content, true);
 
-  listItem.getElementById("uname1").value = 'JohnDoe';
-  // };
+//   // listItem.getElementById("uname1").value = 'JohnDoe';
+//   // };
 
-  // document.getElementById("email").placeholder=user_obj.email;
-  // document.getElementById("phone").placeholder=user_obj.phone;
-  // document.getElementById("psw").placeholder=user_obj.password;  
   
-}
+// }
 
 function editUser(){
   username = document.getElementById('uname').value;
   psw = document.getElementById('psw').value;
   email=document.getElementById('email').value;
   phone=document.getElementById('phone').value;
-  let user = {
-    name: username,
-    password: psw,
-    email:email,
-    phone:phone
-  };
+  if((username=='')||(psw=='')||(email=='')||(phone=='')){
+    alert("please full the fields");
+  }else{
 
-  var Fxml = new FXMLHttpRequest();
-  Fxml.open("POST", "editUser",user, true);
-  Fxml.send();
-  
+    let user = {
+      name: username,
+      password: psw,
+      email:email,
+      phone:phone
+    };
+
+    var Fxml = new FXMLHttpRequest();
+    Fxml.open("POST", "editUser",user, true);
+    Fxml.send();
+  }
 }

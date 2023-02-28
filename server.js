@@ -40,31 +40,26 @@ class server{
 
 
         if(req.method=='POST'){
-            if(req.url=='editUser'){
-                res=db.updateUser(req.body);
+        
+            if(req.url=="addUser"){
+                res=db.register(req.body); //if its true as he managed to add
             }else{
-                if(req.url=="addUser"){
-                    res=db.register(req.body); //if its true as he managed to add
-                }else{
-                    if(req.url=="addNewTask"){
-                        res=db.addNewTask(req.body);  //if its true as he managed to add
-                    }
+                if(req.url=="addNewTask"){
+                    res=db.addNewTask(req.body);  //if its true as he managed to add
                 }
+            }
             // if(JSON.parse(req.url)=="userSignIn"){
             //     res=db.signIn(req.body);
             // }
         }
-        }
+        
         if(req.method=='DELETE'){
             res=db.deleteTask(req.body);
         }
 
         if(req.method=='PUT'){
-            if(JSON.parse(req.url)=="user"){
-                res=db.updateUserDetailes(req.body); //if its true as he managed to add
-            }
-            if(JSON.parse(req.url)=="task"){
-                res=db.updateTaskDetailes(req.body);  //if its true as he managed to add
+            if(req.url=='editUser'){
+                res=db.updateUser(req.body);
             }
 
         }

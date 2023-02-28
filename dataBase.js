@@ -39,13 +39,13 @@ class dataBase{
       
     
       for (const user of this.userArray){
-        if(JSON.parse(user).name===username){
+        if(user.name===username){
           alert("user name already exist!")
           return;
         }
       }
 
-      this.userArray.push(user);
+      this.userArray.push(JSON.parse(user));
       localStorage.setItem('users',JSON.stringify(this.userArray));
       sessionStorage.setItem("currentUser",username);
       return true;
@@ -164,8 +164,8 @@ class dataBase{
     psw = user_obj.password;
 
     for (const user of this.userArray){
-      if(JSON.parse(user).name===username){
-          if(JSON.parse(user).password===psw){
+      if(user.name===username){
+          if(user.password===psw){
             sessionStorage.setItem("currentUser",username);
             return user;
 
