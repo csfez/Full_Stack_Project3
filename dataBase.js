@@ -59,8 +59,8 @@ class dataBase{
       psw = user_obj.password;
 
       for (const user of this.userArray){
-        if(JSON.parse(user).name===username){
-          if(JSON.parse(user).password===psw){
+        if(user.name===username){
+          if(user.password===psw){
             
             sessionStorage.setItem("currentUser",username);
             
@@ -176,12 +176,12 @@ class dataBase{
 
   getInfoUser(){
     let currentUser=sessionStorage.getItem('currentUser');
-      for(const user of this.userArray){
-        if(JSON.parse(user).name===currentUser){
-          var user_obj=JSON.parse(user);
-          return user_obj;
-        }
-      }    
+    for(const user of this.userArray){
+      if(user.name===currentUser){
+        var user_obj=user;
+        return user_obj;
+      }
+    }    
   }
 
   getTask(task_){
@@ -200,13 +200,21 @@ class dataBase{
   updateUser(user_){
     let currentUser=sessionStorage.getItem('currentUser');
     for (var i = 0; i < this.userArray.length; i++){
-      if(JSON.parse(userArray[i]).name===currentUser){
-        userArray[i]=user_;
+      if(this.userArray[i].name===currentUser){
+        this.userArray[i]=user_;
       }
     }  
+
+    for (var i = 0; i < this.taskArray.length; i++){
+      if(this.taskArray[i].username===currentUser){
+        this.taskArray[i].username=user_.name;
+      }
+    }  
+
     localStorage.setItem('users',JSON.stringify(this.userArray));
-    //delete first
-    register()
+    localStorage.setItem('tasks',JSON.stringify(this.taskArray));
+
+    sessionStorage.setItem("currentUser",username);
     return true;
   }
   

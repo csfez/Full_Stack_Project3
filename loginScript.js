@@ -88,7 +88,7 @@ function addUser() {
 
   var user_json = JSON.stringify(user);
   var Fxml = new FXMLHttpRequest();
-  Fxml.open("POST", "dataBase.js", user_json, true);
+  Fxml.open("POST", "addUser", user_json, true);
   var res = Fxml.send(user_json);
   if (res) {
     alert("your account has been created")
@@ -139,7 +139,7 @@ function signIn() {
   var user_json = JSON.stringify(user);
   var Fxml = new FXMLHttpRequest();
 
-  Fxml.open("GET","dataBase.js", user_json, true);
+  Fxml.open("GET","signIn", user_json, true);
   var res = Fxml.send();
   if (res) {
     var button = document.getElementById('sign_in_btn');
@@ -189,7 +189,7 @@ function addNewTask() {
 
       var task_json = JSON.stringify(task);
       var Fxml = new FXMLHttpRequest();
-      Fxml.open("POST", "dataBase.js", task_json, true);
+      Fxml.open("POST", "addNewTask", task_json, true);
       var res = Fxml.send(task_json);
       if (res) {
         alert('task saves');
@@ -212,7 +212,7 @@ function addNewTask() {
 function showTasks() {
 
   var Fxml = new FXMLHttpRequest();
-  Fxml.open("GET", "dataBase.js", null, true);
+  Fxml.open("GET", "showTask", null, true);
   var res = Fxml.send();
   if (res) {
     for(const tas of res){
@@ -243,7 +243,8 @@ function showTasks() {
 
     }
      checked();
-  } 
+    //  myInfos();
+  }
    
     // var closebtns = document.getElementsByClassName("close");
     //   var i;
@@ -304,7 +305,7 @@ function checked(){
 
 function delete_task(task_deleted){
   var Fxml = new FXMLHttpRequest();
-  Fxml.open("DELETE", "dataBase.js", task_deleted, true);
+  Fxml.open("DELETE", "deleteTask", task_deleted, true);
   var res = Fxml.send(task_deleted);
 }
 
@@ -313,7 +314,7 @@ function delete_task(task_deleted){
 //   Fxml.open("DELETE", "dataBase.js", task_deleted, true);
 //   var res = Fxml.send(task_deleted);
 // }
-myInfos();
+// myInfos();
 function myInfos(){
   // app.init();
   var Fxml = new FXMLHttpRequest();
@@ -326,11 +327,25 @@ function myInfos(){
 }
 
 function editInfos(){
-  var Fxml = new FXMLHttpRequest();
-  Fxml.open("GET", "getInfoUser","getInfoUser", true);
-  var res = Fxml.send();
- // var user_obj=myInfos();
-  document.getElementsById("uname1").placeholder=res.name;
+  // var Fxml = new FXMLHttpRequest();
+  // Fxml.open("GET", "getInfoUser","getInfoUser", true);
+  // var res = Fxml.send();
+  var user_obj=myInfos();
+  // window.onload = function() {
+  app.nav();
+  var temp = document.getElementById('edit_info');
+  var clon = temp.content.cloneNode(true);
+
+  // Récupération de l'élément input
+  const input = clon.querySelector('#uname1');
+  
+  // Modification de la valeur de l'input
+  input.value = 'nouvelle valeur';
+  var listItem = document.importNode(temp.content, true);
+
+  listItem.getElementById("uname1").value = 'JohnDoe';
+  // };
+
   // document.getElementById("email").placeholder=user_obj.email;
   // document.getElementById("phone").placeholder=user_obj.phone;
   // document.getElementById("psw").placeholder=user_obj.password;  
@@ -350,6 +365,7 @@ function editUser(){
   };
 
   var Fxml = new FXMLHttpRequest();
-  Fxml.open("GET", "editUser",user, true);
-  var res = Fxml.send();
+  Fxml.open("POST", "editUser",user, true);
+  Fxml.send();
+  
 }
