@@ -48,9 +48,7 @@ class server{
                     res=db.addNewTask(req.body);  //if its true as he managed to add
                 }
             }
-            // if(JSON.parse(req.url)=="userSignIn"){
-            //     res=db.signIn(req.body);
-            // }
+           
         }
         
         if(req.method=='DELETE'){

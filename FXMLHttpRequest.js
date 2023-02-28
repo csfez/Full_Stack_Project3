@@ -10,19 +10,28 @@ class FXMLHttpRequest{
     this.readyState=0;
     this.status=0;
     this.responseText="";
+    this.onload = () => {};
+    
   }
 
   send(){  //send the request to network
     var net=new network()
-    var res=this.responseText=net.send(this);
-    return res;
-
+    this.responseText=this.responseText=net.send(this);
+    //return this.responseText;
+    if(this.status==200){
+    this.onload();
+    }
   }
 
   send(data){
     var net=new network()
-    var res=this.responseText=net.send(this);
-    return res;
+    this.responseText=this.responseText=net.send(this);
+   // return this.responseText;
+   if(this.status=200){
+
+   this.onload();
+
   }
+}
 }
 

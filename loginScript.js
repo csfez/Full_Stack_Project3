@@ -138,10 +138,9 @@ function addUser() {
   var user_json = JSON.stringify(user);
   var Fxml = new FXMLHttpRequest();
   Fxml.open("POST", "addUser", user_json, true);
-  var res = Fxml.send(user_json);
-  if (res) {
+  Fxml.send(user_json);
     alert("your account has been created")
-  }
+  
   cleanInputs();
 
 }
@@ -179,7 +178,6 @@ function signIn() {
   username = document.getElementById('uname').value;
   psw = document.getElementById('psw').value;
   
-
   let user = {
     type: "userSignIn",
     name: username,
@@ -189,8 +187,9 @@ function signIn() {
   var Fxml = new FXMLHttpRequest();
 
   Fxml.open("GET","signIn", user_json, true);
-  var res = Fxml.send();
-  if (res) {
+  Fxml.onload=function() {
+    var res =Fxml.responseText;
+    if(res){
     var button = document.getElementById('sign_in_btn');
     button.dataset.target = "app"
     app.init();
@@ -203,10 +202,14 @@ function signIn() {
     h1Element.textContent = `Welcome ${username}`;
 
     document.getElementById("app_div").appendChild(h1Element);
-
-  } else {
-    cleanInputs();
-    alert("wrong userName or password")
+    }
+    else{
+      cleanInputs();
+    alert("wrong userName or password");
+    }
+  } 
+    Fxml.send();
+    
   }
 
  /*  var user_json = JSON.stringify(user);
@@ -221,9 +224,9 @@ function signIn() {
   } else {
     cleanInputs();
   } */
-}
 
-function addNewTask() {
+
+/* function addNewTask() {
   // username = document.getElementById('username').value;
   title = document.getElementById('title').value;
   if(title==null){
@@ -262,7 +265,9 @@ function showTasks() {
 
   var Fxml = new FXMLHttpRequest();
   Fxml.open("GET", "showTask", null, true);
-  var res = Fxml.send();
+  Fxml.send();
+  var res=Fxml.responseText;
+
   if (res) {
     for(const tas of res){
       var li = document.createElement("li");
@@ -311,6 +316,71 @@ function showTasks() {
     // document.getElementById("tasks").innerHTML = res;
   //}
   
+} */
+
+function addNewTask() {
+  title = document.getElementById('title').value;
+  if(title==null){
+    alert("You must write something!");
+    }
+  else{
+      let task = {
+        type: "add_task",
+        name: username,
+        title: title,
+      };
+
+      var task_json = JSON.stringify(task);
+      var Fxml = new FXMLHttpRequest();
+      Fxml.open("POST", "addNewTask", task_json, true);
+      Fxml.onload=function(){
+        alert('task saved');
+        document.getElementById("myUL").innerHTML = "";
+        showTasks();
+   
+        checked();
+      }
+      Fxml.send(task_json);
+  } 
+}
+
+
+function showTasks() {
+
+  var Fxml = new FXMLHttpRequest();
+  Fxml.open("GET", "showTask", null, true);
+
+  Fxml.onload=function() {
+    var res=Fxml.responseText;
+    for(const tas of res){
+      var li = document.createElement("li");
+      var inputValue = tas.title;
+      var t = document.createTextNode(inputValue);
+      li.appendChild(t);
+      
+      document.getElementById("myUL").appendChild(li);
+      
+      document.getElementById("title").value = "";
+
+      var span = document.createElement("SPAN");
+      
+      var txt = document.createTextNode("\u00D7");
+      span.className= "close";
+      span.id=tas.title;
+       
+      span.appendChild(txt);
+      li.appendChild(span);
+
+      span.onclick = function() {
+        this.parentElement.style.display = 'none';
+        delete_task(this.id);
+      };
+
+    }
+     checked();
+  };
+  Fxml.send();
+  
 }
 
 function checked(){
@@ -323,48 +393,14 @@ function checked(){
   }, false);
 }
 
-// function showNewTasks(NewTask){
-//   var li = document.createElement("li");
-//   var inputValue = NewTask.title;
-//   var t = document.createTextNode(inputValue);
-//   li.appendChild(t);
-//   if (inputValue === '') {
-//     alert("You must write something!");
-//   } else {
-//     document.getElementById("myUL").appendChild(li);
-//   }
-//   document.getElementById("title").value = "";
-
-//   var span = document.createElement("SPAN");
-//   var txt = document.createTextNode("\u00D7");
-//   span.className = "close";
-//   span.appendChild(txt);
-//   li.appendChild(span);
-//   var closebtns = document.getElementsByClassName("close");
-
-//   // Loop through the elements, and hide the parent, when clicked on
-  
-//   closebtns[0].addEventListener("click", function() {
-//     this.parentElement.style.display = 'none';
-//     delete_task(this.id);
-//   });
-
- 
-// }
 
 function delete_task(task_deleted){
   var Fxml = new FXMLHttpRequest();
   Fxml.open("DELETE", "deleteTask", task_deleted, true);
-  var res = Fxml.send(task_deleted);
+  Fxml.send(task_deleted);
 }
 
-// function updateTask(task_updated){
-//   var Fxml = new FXMLHttpRequest();
-//   Fxml.open("DELETE", "dataBase.js", task_deleted, true);
-//   var res = Fxml.send(task_deleted);
-// }
-// myInfos();
-function myInfos(){
+/* function myInfos(){
   // app.init();
   var Fxml = new FXMLHttpRequest();
   Fxml.open("GET", "getInfoUser","getInfoUser", true);
@@ -373,32 +409,21 @@ function myInfos(){
   document.getElementById("user_email").innerText=res.email;
   document.getElementById("user_phone").innerText=res.phone;
   return res;
+} */
+
+function myInfos(){
+  // app.init();
+  var Fxml = new FXMLHttpRequest();
+  Fxml.open("GET", "getInfoUser","getInfoUser", true);
+  Fxml.onload=function(){
+    document.getElementById("user_name").innerText=Fxml.responseText.name;
+    document.getElementById("user_email").innerText=Fxml.responseText.email;
+    document.getElementById("user_phone").innerText=Fxml.responseText.phone;
+    return res;
+  };
+  Fxml.send();
+
 }
-
-// function editInfos(){
-//   // var Fxml = new FXMLHttpRequest();
-//   // Fxml.open("GET", "getInfoUser","getInfoUser", true);
-//   // var res = Fxml.send();
-//   var user_obj=myInfos();
-//   // window.onload = function() {
-//   // app.nav();
-//   // var temp = document.getElementById('edit_info');
-//   // var clon = temp.content.cloneNode(true);
-
-//   var name=document.getElementById("uname");
-//   name.setAttribute("value","john");
-//   // // Récupération de l'élément input
-//   // const input = clon.querySelector('#uname1');
-  
-//   // // Modification de la valeur de l'input
-//   // input.value = 'nouvelle valeur';
-//   // var listItem = document.importNode(temp.content, true);
-
-//   // listItem.getElementById("uname1").value = 'JohnDoe';
-//   // };
-
-  
-// }
 
 function editUser(){
   username = document.getElementById('uname').value;
