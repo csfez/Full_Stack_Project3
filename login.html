@@ -138,27 +138,28 @@
 
     <template id="edit_info">
       <div id="edit_info_div">
-        <form>
-          <div class="content">
-            <div class="input-field">
-              <input id="uname1" type="userName" placeholder="Password" required>
+        <div class="login-form">
+          <form>
+            <div class="content">
+              <div class="input-field">
+                <input id="uname" type="userName" placeholder="name" required>
+              </div>
+              <div class="input-field">
+                <input id="psw" type="password" placeholder="Password" required>
+              </div>
+              <div class="input-field">
+                <input id="email" type="email" placeholder="email" required>
+              </div>
+              <div class="input-field">
+                <input id="phone" type="number" placeholder="phone number" required>
+              </div>
+              
             </div>
-            <div class="input-field">
-              <input name="psw" type="password" placeholder="Password" required>
+            <div class="action">
+              <button class="btn" data-target="app" id="edit_btn" onclick="editUser()">Edit</button>
             </div>
-            <div class="input-field">
-              <input name="email" type="email" placeholder="email" required>
-            </div>
-            <div class="input-field">
-              <input name="phone" type="number" placeholder="phone number" required>
-            </div>
-            
-          </div>
-          <div class="action">
-            <button class="btn" data-target="sign_in" id="register_btn" onclick="editUser()">Register</button>
-          </div>
-        </form>
-
+          </form>
+        </div>
       </div>
 
     </template>
