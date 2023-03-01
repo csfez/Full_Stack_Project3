@@ -1,6 +1,3 @@
-//import {network} from "./network.js"
-
-
 class FXMLHttpRequest{
   open(method, url, body, async) {
     this.method=method;
@@ -17,7 +14,6 @@ class FXMLHttpRequest{
   send(){  //send the request to network
     var net=new network()
     this.responseText=net.send(this);
-    //return this.responseText;
     if(this.status==200){
       this.onload();
     }
@@ -26,7 +22,6 @@ class FXMLHttpRequest{
   send(data){
     var net=new network()
     this.responseText=net.send(this);
-   // return this.responseText;
    if(this.status=200){
 
     this.onload();

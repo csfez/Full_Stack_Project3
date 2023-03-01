@@ -13,9 +13,6 @@ const app = {
         pg.addEventListener('show', app.pageShown);
     })
     
-    // app.pages = document.getElementsByTagName("template");
-    // console.log(app.pages);
-
     document.querySelectorAll('.btn').forEach((button) => {
       button.addEventListener('click', app.nav);
     })
@@ -33,18 +30,10 @@ const app = {
     var temp = document.querySelector(`#${currentPage}`);
     var clon = temp.content.cloneNode(true);
 
-    // var listItem = document.importNode(temp.content, true);
-
-    // (`#${history.state}`).hide();
-
-    // const element = listItem.getElementById("div_temp");
     console.log(history.state);
     var tempOld = document.querySelector(`${location.hash}_div`);
-    // var clonOld = tempOld.content.cloneNode(true);
     console.log(history.state);
-    // var listItemTempOld = document.importNode(tempOld.content, true);
 
-    // listItemTempOld.getElementById("div_temp").innerHTML="";
     document.querySelector('#main').removeChild(tempOld);
     document.querySelector('#main').appendChild(clon);
 
@@ -52,28 +41,14 @@ const app = {
       button.addEventListener('click', app.nav);
     })
     console.log(history.state)
-    // window.addEventListener('init', app.init);
-    // document.getElementById(`${currentPage}_div`).dispatchEvent(app.init);
-
     
     history.pushState({}, "currentPage", `#${currentPage}`);
-    // history.replaceState(`${currentPage}_div`, "currentPage", `#${currentPage}`);
     document.getElementById(currentPage).dispatchEvent(app.show);
-    // window.addEventListener('popstate', app.poppin);
 
   },
   pageShown: function(ev){
     console.log('Page', ev.target.id, 'just shown');
     console.log(currentPage);
-    // if(ev.target.id=="edit_info"){
-    //   var Fxml = new FXMLHttpRequest();
-    //   Fxml.open("GET", "getInfoUser","getInfoUser", true);
-    //   var user = Fxml.send();
-    //   document.getElementById("uname").setAttribute("value",user.name);
-    //   document.getElementById("email").setAttribute("value",user.email);
-    //   document.getElementById("phone").setAttribute("value",user.phone);
-    //   document.getElementById("psw").setAttribute("value",user.password);  
-    // }
 
     if(ev.target.id=="edit_info"){
       var Fxml = new FXMLHttpRequest();
@@ -85,13 +60,11 @@ const app = {
         document.getElementById("phone").setAttribute("value",user.phone);
         document.getElementById("psw").setAttribute("value",user.password);  
           
-    
       }
       Fxml.send();
     }
   },
   poppin: function(ev){
-    // console.log(ev.target.getAttribute(`${currentPage}_div`));
     var tempOld = document.querySelector(`#${currentPage}_div`);
     console.log(location.hash, 'popstate event');
     var tempNew = document.querySelector(location.hash);
@@ -104,10 +77,7 @@ const app = {
     })
     let hash = location.hash.replace('#' ,'');
     currentPage=hash;
-    // document.querySelector('.active').classList.remove('active');
-    // document.getElementById(hash).classList.add('active');
     console.log(hash)
-    //history.pushState({}, currentPage, `#${currentPage}`);
     document.getElementById(hash).dispatchEvent(app.show);
   }
 
@@ -120,7 +90,6 @@ function cleanInputs() {
 }
 
 function addUser() {
-  //test username
   username = document.getElementById('uname').value;
   psw = document.getElementById('psw').value;
   email=document.getElementById('email').value;
@@ -132,7 +101,6 @@ function addUser() {
     return false;
   }
 
-  //test password
   if (!checkPassword(psw)) {
     return false;
   }
@@ -219,10 +187,7 @@ function signIn() {
     }
   } 
     Fxml.send();
-    
   }
-
-
   
 function addNewTask() {
   title = document.getElementById('title').value;
@@ -249,7 +214,6 @@ function addNewTask() {
       Fxml.send(task_json);
   } 
 }
-
 
 function showTasks() {
 
@@ -281,16 +245,13 @@ function showTasks() {
         this.parentElement.style.display = 'none';
         delete_task(this.id);
       };
-
     }
      checked();
   };
-  Fxml.send();
-  
+  Fxml.send(); 
 }
 
 function checked(){
-  // Add a "checked" symbol when clicking on a list item
   var list = document.querySelector('ul');
   list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
@@ -299,23 +260,11 @@ function checked(){
   }, false);
 }
 
-
 function delete_task(task_deleted){
   var Fxml = new FXMLHttpRequest();
   Fxml.open("DELETE", "deleteTask", task_deleted, true);
   Fxml.send(task_deleted);
 }
-
-/* function myInfos(){
-  // app.init();
-  var Fxml = new FXMLHttpRequest();
-  Fxml.open("GET", "getInfoUser","getInfoUser", true);
-  var res = Fxml.send();
-  document.getElementById("user_name").innerText=res.name;
-  document.getElementById("user_email").innerText=res.email;
-  document.getElementById("user_phone").innerText=res.phone;
-  return res;
-} */
 
 function myInfos(){
   // app.init();
@@ -348,7 +297,7 @@ function editUser(){
     };
 
     var Fxml = new FXMLHttpRequest();
-    Fxml.open("POST", "editUser",user, true);
+    Fxml.open("PUT", "editUser",user, true);
     Fxml.send();
   }
 }
