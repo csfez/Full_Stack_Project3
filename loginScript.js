@@ -352,3 +352,12 @@ function editUser(){
     Fxml.send();
   }
 }
+
+function pswfunction(){
+    const password = document.querySelector('#psw');
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+  
+}
