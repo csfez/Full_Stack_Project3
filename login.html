@@ -87,30 +87,26 @@
 
          
         <div class="page-content">
-         <!--  <p>Log-out icon on a button:
-            <button type="button" class="btn"><img src="https://www.google.co.il/url?sa=i&url=https%3A%2F%2Fwww.shareicon.net%2Fclose-power-logout-off-login-862833&psig=AOvVaw07wYeeZb35LYfIWLmnxBc9&ust=1677690506911000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCICm5ajauP0CFQAAAAAdAAAAABAR"/>
-              <span class="glyphicon glyphicon-log-out"></span> Log out
-            </button>
-          </p> -->
           <div class="left">
               <div id="newtask">
                   <input type="text" id="title" placeholder="task title">
                   <button data-target="app" id="addNewTask_btn" onclick="addNewTask()">Add New Task</button>
-                </div>
+              </div>
            
             <div class="task_list">
-            <script> showTasks(); myInfos();</script>
-            <div class="tasks-wrapper" id="tasks">
-              <ul id="myUL">
-              
-              </ul>
-            </div>
+              <script> showTasks(); myInfos();</script>
+              <div class="tasks-wrapper" id="tasks">
+                <ul id="myUL">
+                
+                </ul>
+              </div>
             </div>
            
           </div>
         <div class="card"> 
-          <img src="https://www.shareicon.net/download/2016/12/12/862833_close.ico" onclic="logOut" title="log out" style="width:10%; float:right; right: 5px;"> 
-            <img src="https://www.pngmart.com/files/22/User-Avatar-Profile-Background-Isolated-PNG.png" style="width:70%"/>
+         
+          <img src="https://www.shareicon.net/download/2016/12/12/862833_close.ico" class="btn" data-target="sign_in" title="log out" style="width:10%; float:right;margin-right:10px ;margin-top: 5px; "> 
+            <img src="https://www.pngmart.com/files/22/User-Avatar-Profile-Background-Isolated-PNG.png" style="width:90%"/>
             <h1 id="user_name"></h1>
             <br>
             <p id="user_email" class="title"></p>

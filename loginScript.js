@@ -65,20 +65,30 @@ const app = {
   pageShown: function(ev){
     console.log('Page', ev.target.id, 'just shown');
     console.log(currentPage);
+    // if(ev.target.id=="edit_info"){
+    //   var Fxml = new FXMLHttpRequest();
+    //   Fxml.open("GET", "getInfoUser","getInfoUser", true);
+    //   var user = Fxml.send();
+    //   document.getElementById("uname").setAttribute("value",user.name);
+    //   document.getElementById("email").setAttribute("value",user.email);
+    //   document.getElementById("phone").setAttribute("value",user.phone);
+    //   document.getElementById("psw").setAttribute("value",user.password);  
+    // }
+
     if(ev.target.id=="edit_info"){
       var Fxml = new FXMLHttpRequest();
       Fxml.open("GET", "getInfoUser","getInfoUser", true);
-      var user = Fxml.send();
-      document.getElementById("uname").setAttribute("value",user.name);
-      document.getElementById("email").setAttribute("value",user.email);
-      document.getElementById("phone").setAttribute("value",user.phone);
-      document.getElementById("psw").setAttribute("value",user.password);  
+      Fxml.onload=function() {
+        var user=Fxml.responseText;
+        document.getElementById("uname").setAttribute("value",user.name);
+        document.getElementById("email").setAttribute("value",user.email);
+        document.getElementById("phone").setAttribute("value",user.phone);
+        document.getElementById("psw").setAttribute("value",user.password);  
+          
+    
+      }
+      Fxml.send();
     }
-    // let h1 = ev.target.querySelector('h1');
-    // h1.classList.add('big')
-    // setTimeout((h)=>{
-    //     h.classList.remove('big');
-    // }, 1200, h1);
   },
   poppin: function(ev){
     // console.log(ev.target.getAttribute(`${currentPage}_div`));
@@ -212,112 +222,8 @@ function signIn() {
     
   }
 
- /*  var user_json = JSON.stringify(user);
-  var Fxml = new FXMLHttpRequest();
-  Fxml.open("POST", "dataBase.js", user_json, true);
-  var res = Fxml.send(user_json);
-  if (res) {
-    var button = document.getElementById('sign_in_btn');
-    button.dataset.target = "app"
-    app.init();
-    showTasks()
-  } else {
-    cleanInputs();
-  } */
 
-
-/* function addNewTask() {
-  // username = document.getElementById('username').value;
-  title = document.getElementById('title').value;
-  if(title==null){
-    alert("You must write something!");
-    }
-  else{
-      let task = {
-        type: "add_task",
-        name: username,
-        title: title,
-      };
-
-      var task_json = JSON.stringify(task);
-      var Fxml = new FXMLHttpRequest();
-      Fxml.open("POST", "addNewTask", task_json, true);
-      var res = Fxml.send(task_json);
-      if (res) {
-        alert('task saves');
-        document.getElementById("myUL").innerHTML = "";
-        showTasks();
-        // // Add a "checked" symbol when clicking on a list item
-        // var list = document.querySelector('ul');
-        // list.addEventListener('click', function(ev) {
-        //   if (ev.target.tagName === 'LI') {
-        //     ev.target.classList.toggle('checked');
-        //   }
-        // }, false);
-        checked();
-      }
-  }
   
-}
-
-
-function showTasks() {
-
-  var Fxml = new FXMLHttpRequest();
-  Fxml.open("GET", "showTask", null, true);
-  Fxml.send();
-  var res=Fxml.responseText;
-
-  if (res) {
-    for(const tas of res){
-      var li = document.createElement("li");
-      var inputValue = tas.title;
-      var t = document.createTextNode(inputValue);
-      li.appendChild(t);
-      //  if (inputValue === '') {
-      //   alert("You must write something!");
-      // } else { 
-      document.getElementById("myUL").appendChild(li);
-      //}
-      document.getElementById("title").value = "";
-
-      var span = document.createElement("SPAN");
-      
-      var txt = document.createTextNode("\u00D7");
-      span.className= "close";
-      span.id=tas.title;
-       
-      span.appendChild(txt);
-      li.appendChild(span);
-
-      span.onclick = function() {
-        this.parentElement.style.display = 'none';
-        delete_task(this.id);
-      };
-
-    }
-     checked();
-    //  myInfos();
-  }
-   
-    // var closebtns = document.getElementsByClassName("close");
-    //   var i;
-
-    // // Loop through the elements, and hide the parent, when clicked on
-    // for (i = 0; i < closebtns.length; i++) {
-    //   closebtns[i].addEventListener("click", function() {
-    //     this.parentElement.style.display = 'none';
-    //     delete_task(this.id);
-    //   });
-    // }
-
-    
-
-    // document.getElementById("tasks").innerHTML = res;
-  //}
-  
-} */
-
 function addNewTask() {
   title = document.getElementById('title').value;
   if(title==null){
