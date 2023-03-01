@@ -239,11 +239,24 @@ body {
     font-family: 'Indie Flower', 'Comic Sans', cursive;
 
 }
-#signout-btn {
+/* #signout-btn {
   background-color: #fff;
   color: #000;
   border: 1px solid #000;
   padding: 5px 10px;
   cursor: pointer;
+} */
+
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
 }
 
+.container{
+  padding-top:50px;
+  margin: auto;
+}
