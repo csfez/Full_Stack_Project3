@@ -5,25 +5,6 @@ class server{
         req.readyState=2; //request received
         var res;
         if(req.method=='GET'){
-            // if(req.url=="getInfoUser"){
-            //     res=db.getInfoUser();
-            // }
-            // else{
-            //     if(JSON.parse(req.url)!=null){
-            //         if(JSON.parse(req.url).type=="user" ||JSON.parse(req.url).type=="userSignIn"){
-            //             res= db.getUser(req.url)
-            //         }
-            //         if(JSON.parse(req.url).type=="task"){
-            //             res=db.getTask(req.url);  //if its true as he managed to add
-            //         }
-                    
-            //     }
-            
-            //     else{
-            //         res= db.getAllTasks(req.url);
-                    
-            //     }
-            // }
             if(req.url=="getInfoUser"){
                 res=db.getInfoUser();
             }else{
@@ -35,9 +16,7 @@ class server{
                     }
                 }
             }
-
         }
-
 
         if(req.method=='POST'){
         
@@ -47,8 +26,7 @@ class server{
                 if(req.url=="addNewTask"){
                     res=db.addNewTask(req.body);  //if its true as he managed to add
                 }
-            }
-           
+            }   
         }
         
         if(req.method=='DELETE'){
@@ -59,7 +37,6 @@ class server{
             if(req.url=='editUser'){
                 res=db.updateUser(req.body);
             }
-
         }
 
         if(res){
